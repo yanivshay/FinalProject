@@ -185,5 +185,44 @@ namespace FinalProject.DAL
             connection.Close();
             connection.Dispose();
         }
+
+        public Food GetRandFood(MealTypeENUM mt)
+        {
+            Food result = new Food();
+            
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = String.Format(
+                "select TOP 1 F.FoodID as FoodID, F.Name as Name, F.Protein as Protein," +
+                " F.Fat as Fat, F.Carbohydrates as Carbohydrates, F.Calories as Calories" +
+                " from MealTypes MT, Foods F where MT.MealType = {0} AND MT.FoodID = F.FoodID ORDER BY NEWID()", (int)mt);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    result.FoodID = Convert.ToInt32(dataReader["FoodID"]);
+                    result.Name = Convert.ToString(dataReader["Name"]);
+                    result.Protein = Convert.ToDouble(dataReader["Protein"]);
+                    result.Fat = Convert.ToDouble(dataReader["Fat"]);
+                    result.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
+                    result.Calories = Convert.ToDouble(dataReader["Calories"]);
+                }
+            }
+
+            //Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
     }
 }

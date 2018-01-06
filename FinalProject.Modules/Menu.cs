@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FinalProject.Modules
 {
@@ -23,6 +24,8 @@ namespace FinalProject.Modules
             }
         }
 
+        public double MenuFitness { get; set; }
+
         public Menu()
         {
             Breakfast = new List<Food>();
@@ -39,7 +42,7 @@ namespace FinalProject.Modules
             Dinner = new List<Food>();
         }
 
-        public float TotalProtien
+        public double TotalProtien
         {
             get
             {
@@ -50,7 +53,7 @@ namespace FinalProject.Modules
             }
         }
 
-        public float TotalFat
+        public double TotalFat
         {
             get
             {
@@ -61,7 +64,7 @@ namespace FinalProject.Modules
             }
         }
 
-        public float TotalCarbohydrates
+        public double TotalCarbohydrates
         {
             get
             {
@@ -72,7 +75,7 @@ namespace FinalProject.Modules
             }
         }
 
-        public float TotalCalories
+        public double TotalCalories
         {
             get
             {
@@ -80,6 +83,28 @@ namespace FinalProject.Modules
                     return 0;
                 else
                     return Foods.Sum(food => food.Calories);
+            }
+        }
+
+        public Menu(Menu menu)
+        {
+            this.Breakfast = new List<Food>();
+            this.Lunch = new List<Food>();
+            this.Dinner = new List<Food>();
+
+            foreach (Food food in menu.Breakfast)
+            {
+                this.Breakfast.Add(new Food(food));
+            }
+
+            foreach (Food food in menu.Lunch)
+            {
+                this.Lunch.Add(new Food(food));
+            }
+
+            foreach (Food food in menu.Dinner)
+            {
+                this.Dinner.Add(new Food(food));
             }
         }
     }

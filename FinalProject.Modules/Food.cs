@@ -36,5 +36,14 @@ namespace FinalProject.Modules
             this.Calories = calories;
             this.Carbohydrates = carbs;
         }
+
+        public Food(Food food)
+        {
+            this.Name = food.Name;
+            this.Protein = food.Protein;
+            this.Fat = food.Fat;
+            this.Calories = food.Calories;
+            this.Carbohydrates = food.Carbohydrates;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FinalProject.DAL;
+﻿using FinalProject.BL;
+using FinalProject.DAL;
 using FinalProject.Modules;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,18 @@ namespace FinalProject.Tester
             UserDal user_dal = UserDal.getInstance();
 
             Menu menu = menu_dal.GetMenu(1);
+            User user = user_dal.GetUser(4);
+            List<Menu> lstMenues = new List<Menu>();
+
+            Menu menutest;
+
+            for (int i = 1; i < 6; i++)
+            {
+                menutest = menu_dal.GetMenu(i);
+                lstMenues.Add(menutest);
+            }
+
+            GeneticAlgo.getInstance().startAlgo(lstMenues, user);
             
             #region Food
             //food_dal.InsertOrUpdateFood(new Food()

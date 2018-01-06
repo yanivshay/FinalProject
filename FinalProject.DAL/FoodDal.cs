@@ -30,11 +30,11 @@ namespace FinalProject.DAL
         public int InsertOrUpdateFood(Food food)
         {
             //Create the SQL Query for inserting an food
-            string createQuery = String.Format("Insert into Foods (Name, Protein ,Fat, Calories, Carbohydrates, Category) Values('{0}', '{1}', '{2}', {3}, {4}, {5} );"
-            + "Select @@Identity", food.Name, food.Protein, food.Fat, food.Calories, food.Carbohydrates, food.Category);
+            string createQuery = String.Format("Insert into Foods (Name, Protein ,Fat, Calories, Carbohydrates) Values('{0}', '{1}', '{2}', {3}, {4});"
+            + "Select @@Identity", food.Name, food.Protein, food.Fat, food.Calories, food.Carbohydrates);
 
-            string updateQuery = String.Format("Update Foods SET Name='{0}', Protein={1} ,Fat={2}, Calories={3}, Carbohydrates={4}, Category={5} Where FoodID = {6};",
-            food.Name, food.Protein, food.Fat, food.Calories, food.Carbohydrates, food.Category, food.FoodID);
+            string updateQuery = String.Format("Update Foods SET Name='{0}', Protein={1} ,Fat={2}, Calories={3}, Carbohydrates={4} Where FoodID = {5};",
+            food.Name, food.Protein, food.Fat, food.Calories, food.Carbohydrates, food.FoodID);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -103,7 +103,6 @@ namespace FinalProject.DAL
                     result.Fat = Convert.ToDouble(dataReader["Fat"]);
                     result.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
                     result.Calories = Convert.ToDouble(dataReader["Calories"]);
-                    result.Category = Convert.ToInt32(dataReader["Category"]);
                 }
             }
 
@@ -144,7 +143,6 @@ namespace FinalProject.DAL
                     food.Fat = Convert.ToDouble(dataReader["Fat"]);
                     food.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
                     food.Calories = Convert.ToDouble(dataReader["Calories"]);
-                    food.Category = Convert.ToInt32(dataReader["Category"]);
 
                     result.Add(food);
                 }

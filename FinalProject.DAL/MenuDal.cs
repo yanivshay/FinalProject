@@ -13,6 +13,7 @@ namespace FinalProject.DAL
     {
         private static MenuDal _instance;
 
+
         private MenuDal()
         {
         }
@@ -85,7 +86,7 @@ namespace FinalProject.DAL
             return savedMenuID;
         }
 
-        public Menu GetFoodById(int menuId)
+        public Menu GetMenuById(int menuId)
         {
             Menu result = new Menu();
 
@@ -176,5 +177,109 @@ namespace FinalProject.DAL
 
             return result;
         }
+
+
+        /*public Menu GetMenuWithOrder(int menuId)
+        {
+            Menu result = new Menu(menuId);
+
+            List<MealsInMenu> MealsInMenu = 
+                MealsInMenuDal.getInstance().GetMealsInMenuByMenuId(menuId);
+
+            foreach (var meal in MealsInMenu)
+            {
+                Food food = 
+                    FoodDal.getInstance().GetFoodById(mt.FoodID);
+                MealType mt = 
+                    MealTypeDal.getInstance().GetMealTypeById(meal.MealTypeID);
+
+                switch (mt.Type)
+	            {
+                    case MealTypeENUM.Breakfast:
+                    {
+                        result.Breakfast.Add(food);
+                    }
+                    case MealTypeENUM.Lunch:
+                    {
+                        result.Lunch.Add(food);
+                    }
+                    case MealTypeENUM.Dinner:
+                    {
+                        result.Dinner.Add(food);
+                    }
+
+		            default:
+	            }
+
+            }
+            
+            return result;
+        }*/
+
+        public Menu GetMenu(int menuId)
+        {
+            Menu result = new Menu(menuId);
+            Food food;
+
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = String.Format(
+                "select FI.FoodID as FoodID, FI.Name as Name, FI.Protein as Protein, FI.Fat as Fat, " + 
+                "FI.Carbohydrates as Carbohydrates, FI.Calories as Calories, MT.MealType as Type" +
+                " from Menues M, MealsInMenues MIM, MealTypes MT, Foods FI where" + 
+                " M.MenuID = {0} AND M.MenuID = MIM.MenuID AND MIM.MealTypeID = MT.MealTypeID AND MT.FoodID = FI.FoodID", menuId);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    int type = Convert.ToInt32(dataReader["Type"]);
+
+                    food = new Food();
+
+                    food.FoodID = Convert.ToInt32(dataReader["FoodID"]);
+                    food.Name = Convert.ToString(dataReader["Name"]);
+                    food.Protein = Convert.ToDouble(dataReader["Protein"]);
+                    food.Fat = Convert.ToDouble(dataReader["Fat"]);
+                    food.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
+                    food.Calories = Convert.ToDouble(dataReader["Calories"]);
+
+                    switch (type)
+	                {
+                        case (int)MealTypeENUM.Breakfast:
+                        {
+                            result.Breakfast.Add(food);
+                                break;
+                        }
+                        case (int)MealTypeENUM.Lunch:
+                        {
+                            result.Lunch.Add(food);
+                            break;
+                        }
+                        case (int)MealTypeENUM.Dinner:
+                        {
+                            result.Dinner.Add(food);
+                            break;
+                        }
+	                }
+
+                }
+            }
+
+            //Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
+
     }
 }

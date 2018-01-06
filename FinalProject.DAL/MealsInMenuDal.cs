@@ -114,6 +114,44 @@ namespace FinalProject.DAL
 
             return result;
         }
+        
+        public List<MealsInMenu> GetMealsInMenuByMenuId(int menuId)
+        {
+            List<MealsInMenu> result = new List<MealsInMenu>();
+
+            //Create the SQL Query for returning an mim category based on its primary key
+            string sqlQuery = String.Format("select * from MealsInMenues where MenuID={0}", menuId);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            MealsInMenu mim = null;
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    mim = new MealsInMenu();
+
+                    mim.MealTypeID = Convert.ToInt32(dataReader["MealTypeID"]);
+                    mim.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    mim.MealsInMenueID = Convert.ToInt32(dataReader["MealsInMenueID"]);
+
+                    result.Add(mim);
+                }
+            }
+
+            //Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
 
         public List<MealsInMenu> GetMealsInMenues()
         {

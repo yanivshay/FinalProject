@@ -20,6 +20,8 @@ namespace FinalProject.Tester
             MeasurementDal msrmnt_dal = MeasurementDal.getInstance();
             MenuDal menu_dal = MenuDal.getInstance();
             UserDal user_dal = UserDal.getInstance();
+
+            Menu menu = menu_dal.GetMenu(1);
             
             #region Food
             //food_dal.InsertOrUpdateFood(new Food()

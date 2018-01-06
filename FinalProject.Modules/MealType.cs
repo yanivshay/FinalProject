@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace FinalProject.Modules
 {
+    public enum MealTypeENUM
+    {
+        Breakfast =1,
+        Lunch,
+        Dinner 
+    }
+
     public class MealType
     {
         public int MealTypeID { get; set; }

@@ -11,14 +11,13 @@ namespace FinalProject.Modules
         public double Fat { get; set; }
         public double Calories { get; set; }
         public double Carbohydrates { get; set; }
-        public int Category { get; set; }
 
         public Food()
         {
         }
 
         public Food(int foodId, string name, double protein,
-            double fat, double calories, double carbs, int category)
+            double fat, double calories, double carbs)
         {
             this.FoodID = foodId;
             this.Name = name;
@@ -26,18 +25,16 @@ namespace FinalProject.Modules
             this.Fat = fat;
             this.Calories = calories;
             this.Carbohydrates = carbs;
-            this.Category = category;
         }
 
         public Food(string name, double protein,
-            double fat, double calories, double carbs, int category)
+            double fat, double calories, double carbs)
         {
             this.Name = name;
             this.Protein = protein;
             this.Fat = fat;
             this.Calories = calories;
             this.Carbohydrates = carbs;
-            this.Category = category;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace FinalProject.BL
 
             Random random = new Random();
             int randomMenues = random.Next(3, 8);
-            int randomItemsToSwap = random.Next(2, 4);
+            int randomItemsToSwap = random.Next(4,7);
 
             for (int i = 0; i < randomMenues; i++)
             {
@@ -72,17 +72,17 @@ namespace FinalProject.BL
                     {
                         case MealTypeENUM.Breakfast:
                             {
-                                mergeMeals(newMenu1.Breakfast.ToList(), newMenu2.Breakfast.ToList());
+                                mergeMeals(newMenu1.Breakfast, newMenu2.Breakfast);
                                 break;
                             }
                         case MealTypeENUM.Lunch:
                             {
-                                mergeMeals(newMenu1.Lunch.ToList(), newMenu2.Lunch.ToList());
+                                mergeMeals(newMenu1.Lunch, newMenu2.Lunch);
                                 break;
                             }
                         case MealTypeENUM.Dinner:
                             {
-                                mergeMeals(newMenu1.Dinner.ToList(), newMenu2.Dinner.ToList());
+                                mergeMeals(newMenu1.Dinner, newMenu2.Dinner);
                                 break;
                             }
                     }
@@ -92,8 +92,9 @@ namespace FinalProject.BL
                 res.Add(newMenu2);
             }
 
-            int randomMutation = random.Next(2, 4);
             menuPopulation = menuPopulation.Concat(res).ToList();
+
+            int randomMutation = random.Next(2, 4);
 
             for (int i = 0; i < randomMutation; i++)
             {
@@ -144,6 +145,14 @@ namespace FinalProject.BL
 
             meal1.Add(temp2);
             meal2.Add(temp);
+        }
+
+        private void print(List<Food> meal1)
+        {
+            foreach (var item in meal1)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
 
         private void fitness(List<Menu> menuPopulation, User user)

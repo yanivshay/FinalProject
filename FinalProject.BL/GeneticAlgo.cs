@@ -26,11 +26,15 @@ namespace FinalProject.BL
             return _instance;
         }
 
-        public void startAlgo(List<Menu> menuPopulation, User user)
+        public List<Menu> startAlgo(User user)
         {
+
+            List<Menu> menuPopulation = MenuDal.getInstance().GetMenues();
             fitness(menuPopulation, user);
             List<Menu> bestFivePopulation = menuPopulation.OrderBy(x => x.MenuFitness).Take(5).ToList();
             List<Menu> bestFivePopulation1 = geneticAlgo(bestFivePopulation, user, 1);
+
+            return bestFivePopulation1;
         }
 
         private List<Menu> geneticAlgo(List<Menu> menuPopulation, User user, int generation)

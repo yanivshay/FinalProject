@@ -34,7 +34,7 @@ namespace FinalProject.Tester
                 lstMenues.Add(menutest);
             }
 
-            GeneticAlgo.getInstance().startAlgo(lstMenues, user);
+            GeneticAlgo.getInstance().startAlgo(user);
             
             #region Food
             //food_dal.InsertOrUpdateFood(new Food()

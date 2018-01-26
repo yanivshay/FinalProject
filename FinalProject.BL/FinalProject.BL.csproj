@@ -99,6 +99,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserActions.cs" />
+    <Compile Include="MenuActions.cs" />
+    <Compile Include="MeasurementActions.cs" />
+    <Compile Include="MealTypeActions.cs" />
+    <Compile Include="MealsInMenuActions.cs" />
+    <Compile Include="GoalActions.cs" />
+    <Compile Include="FoodActions.cs" />
     <Compile Include="GeneticAlgo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

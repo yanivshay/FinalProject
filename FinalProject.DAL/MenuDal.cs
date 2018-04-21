@@ -42,7 +42,7 @@ namespace FinalProject.DAL
             + "Select @@Identity");
 
             string updateQuery = "";
-            //string updateQuery = String.Format("Update Foods SET Name='{0}', Protein={1} ,Fat={2}, Calories={3}, Carbohydrates={4}, Category={5} Where FoodID = {6};",
+            //string updateQuery = String.Format("Update Menues SET Name='{0}', Protein={1} ,Fat={2}, Calories={3}, Carbohydrates={4}, Category={5} Where FoodID = {6};",
             //food.Name, food.Protein, food.Fat, food.Calories, food.Carbohydrates, food.Category, food.FoodID);
 
             //Create and open a connection to SQL Server 
@@ -88,7 +88,7 @@ namespace FinalProject.DAL
 
         public Menu GetMenuById(int menuId)
         {
-            Menu result = new Menu();
+            Menu result = new Menu(0);
 
             //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = String.Format("select * from Menues where MenuID={0}", menuId);
@@ -139,7 +139,7 @@ namespace FinalProject.DAL
             {
                 while (dataReader.Read())
                 {
-                    menu = new Menu();
+                    menu = new Menu(0);
 
                     menu.MenuID = Convert.ToInt32(dataReader["MenuID"]);
 

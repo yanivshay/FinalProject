@@ -30,11 +30,11 @@ namespace FinalProject.DAL
         public int InsertOrUpdateGoal(Goal goal)
         {
             //Create the SQL Query for inserting an goal
-            string createQuery = String.Format("Insert into Goals (Weight, BodyFat ,SuccessRate, MenuID) Values({0}, {1}, {2}, {3});"
-            + "Select @@Identity", goal.Weight, goal.BodyFat, goal.SuccessRate, goal.MenuID);
+            string createQuery = String.Format("Insert into Goals (GoalWeight, BodyFat ,StartingWeight, MenuID) Values({0}, {1}, {2}, {3});"
+            + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID);
 
-            string updateQuery = String.Format("Update Goals SET Weight={0}, BodyFat={1} ,SuccessRate={2}, MenuID={3} Where GoalID = {4};",
-            goal.Weight, goal.BodyFat, goal.SuccessRate, goal.MenuID, goal.GoalID);
+            string updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, MenuID={3} Where GoalID = {4};",
+            goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.GoalID);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -99,8 +99,8 @@ namespace FinalProject.DAL
                 {
                     result.GoalID = Convert.ToInt32(dataReader["GoalID"]);
                     result.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
-                    result.Weight = Convert.ToDouble(dataReader["Weight"]);
-                    result.SuccessRate = Convert.ToDouble(dataReader["SuccessRate"]);
+                    result.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
+                    result.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
                     result.MenuID = Convert.ToInt32(dataReader["MenuID"]);
                 }
             }
@@ -138,8 +138,8 @@ namespace FinalProject.DAL
 
                     goal.GoalID = Convert.ToInt32(dataReader["GoalID"]);
                     goal.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
-                    goal.Weight = Convert.ToDouble(dataReader["Weight"]);
-                    goal.SuccessRate = Convert.ToDouble(dataReader["SuccessRate"]);
+                    goal.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
+                    goal.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
                     goal.MenuID = Convert.ToInt32(dataReader["MenuID"]);
 
                     result.Add(goal);

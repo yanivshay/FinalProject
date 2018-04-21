@@ -8,6 +8,8 @@ namespace FinalProject.Modules
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
         public Nullable<int> MeasurementID { get; set; }
         public DateTime Birthday { get; set; }
         public double Height { get; set; }
@@ -37,7 +39,7 @@ namespace FinalProject.Modules
         }
 
         public User(int userId, string firstName, string lastName, int measurementId,
-            DateTime birthday, double height, int gender, int goalId)
+            DateTime birthday, double height, int gender, int goalId, string email, string password)
         {
             this.UserID = userId;
             this.FirstName = firstName;
@@ -47,10 +49,12 @@ namespace FinalProject.Modules
             this.Height = height;
             this.Gender = gender;
             this.GoalID = goalId;
+            this.Email = email;
+            this.Password = password;
         }
 
         public User(string firstName, string lastName, int measurementId,
-            DateTime birthday, double height, int gender, int goalId)
+            DateTime birthday, double height, int gender, int goalId, string email, string password)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -59,6 +63,8 @@ namespace FinalProject.Modules
             this.Height = height;
             this.Gender = gender;
             this.GoalID = goalId;
+            this.Email = email;
+            this.Password = password;
         }
     }
 }

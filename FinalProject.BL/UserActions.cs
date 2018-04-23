@@ -54,5 +54,12 @@ namespace FinalProject.BL
             Goal goal = GoalDal.getInstance().GetGoalById(user.GoalID.Value);
 
         }
+
+        public bool checkLogin(string email, string password)
+        {
+            User user = dal.GetUserByEmail(email);
+
+            return user.Password.Equals(password) ? true : false;
+        }
     }
 }

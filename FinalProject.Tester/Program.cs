@@ -22,20 +22,20 @@ namespace FinalProject.Tester
             MenuDal menu_dal = MenuDal.getInstance();
             UserDal user_dal = UserDal.getInstance();
 
-            Menu menu = menu_dal.GetMenu(1);
-            User user = user_dal.GetUser(4);
-            List<Menu> lstMenues = new List<Menu>();
+            //Menu menu = menu_dal.GetMenu(1);
+            //User user = user_dal.GetUser(4);
+            //List<Menu> lstMenues = new List<Menu>();
 
-            Menu menutest;
+            //Menu menutest;
 
-            for (int i = 1; i < 6; i++)
-            {
-                menutest = menu_dal.GetMenu(i);
-                lstMenues.Add(menutest);
-            }
+            //for (int i = 1; i < 6; i++)
+            //{
+            //    menutest = menu_dal.GetMenu(i);
+            //    lstMenues.Add(menutest);
+            //}
 
-            GeneticAlgo.getInstance().startAlgo(user);
-            
+            //GeneticAlgo.getInstance().startAlgo(user);
+
             #region Food
             //food_dal.InsertOrUpdateFood(new Food()
             //{
@@ -53,6 +53,48 @@ namespace FinalProject.Tester
 
             //bool deleteFood = food_dal.DeleteFood(2); 
             #endregion
+
+            User us = new User()
+            {
+                Birthday = DateTime.Now,
+                Email = "lololoa@gmail.com",
+                FirstName = "aba",
+                Gender = 1,
+                Height = 1.95,
+                LastName = "bo",
+                Password = "papapa123",
+                Measurement = new Measurement()
+                {
+                    BodyFat = 15,
+                    Weight = 100
+                },
+                Goal = new Goal()
+                {
+                    BodyFat = 12,
+                    StartingWeight = 100,
+                    GoalWeight = 80
+                },
+                MeasurementID = 0,
+                GoalID = 0
+            };
+
+
+
+            //bool isLoginOK = UserActions.getInstance().checkLogin("yaa@gmail.com", "ppa123");
+
+            //List<User> lstusers = user_dal.GetUsers();
+
+            //int userId = user_dal.InsertOrUpdateUser(us);
+
+            //User userFromGetUser = user_dal.GetUser(1);
+
+            //userFromGetUser.Goal.GoalWeight = 88.8;
+
+            //int userIdAfterUpdate = user_dal.InsertOrUpdateUser(userFromGetUser);
+
+
+            //bool s1 = user_dal.IsUserExists("yaa@gmail.com");
+            //bool s2 = user_dal.IsUserExists("yssssa@gmail.com");
 
             Console.WriteLine("stam");
         }

@@ -30,11 +30,23 @@ namespace FinalProject.DAL
         public int InsertOrUpdateGoal(Goal goal)
         {
             //Create the SQL Query for inserting an goal
-            string createQuery = String.Format("Insert into Goals (GoalWeight, BodyFat ,StartingWeight, MenuID) Values({0}, {1}, {2}, {3});"
-            + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID);
+            string createQuery = String.Format("Insert into Goals (GoalWeight, BodyFat ,StartingWeight) Values({0}, {1}, {2});"
+            + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight);
 
-            string updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, MenuID={3} Where GoalID = {4};",
-            goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.GoalID);
+            string updateQuery = "";
+
+            if (goal.MenuID == null || goal.MenuID == 0)
+            {
+                updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2} Where GoalID = {3};",
+                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.GoalID);
+            }
+            else
+            {
+                updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, MenuID={3} Where GoalID = {4};",
+                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.GoalID);
+            }
+
+            
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -101,7 +113,15 @@ namespace FinalProject.DAL
                     result.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
                     result.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
                     result.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
-                    result.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+
+                    if (Convert.IsDBNull(dataReader["MenuID"]))
+                    {
+                        result.MenuID = null;
+                    }
+                    else
+                    {
+                        result.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    }
                 }
             }
 

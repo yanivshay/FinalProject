@@ -55,11 +55,15 @@ namespace FinalProject.BL
 
         }
 
-        public bool checkLogin(string email, string password)
+        public User checkLogin(string email, string password)
         {
-            User user = dal.GetUserByEmail(email);
+            User res = null;
 
-            return user.Password.Equals(password) ? true : false;
+            User user = dal.GetUserByEmail(email);
+            if (user!= null && user.Password != null)
+                res= user.Password.Equals(password) ? user : null;
+
+            return res;
         }
     }
 }

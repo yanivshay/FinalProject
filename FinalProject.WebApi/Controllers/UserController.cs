@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using System.Text.RegularExpressions;
 
 namespace FinalProject.WebApi.Controllers
@@ -27,6 +27,8 @@ namespace FinalProject.WebApi.Controllers
         }
 
         // POST values
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.ActionName("Register")]
         public int Register([FromBody]User value)
         {
             string patternName = @"^[a-zA-Z]+$";
@@ -50,7 +52,9 @@ namespace FinalProject.WebApi.Controllers
         }
 
         // POST values
-        public bool Login([FromBody]LoginHelpClass info)
+        [System.Web.Http.ActionName("Login")]
+        [System.Web.Http.HttpPost]
+        public User Login([FromBody]LoginHelpClass info)
         {
             return bl.checkLogin(info.Email, info.Password);
         }

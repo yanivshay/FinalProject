@@ -47,5 +47,23 @@ namespace FinalProject.BL
         {
             return dal.DeleteUser(id);
         }
+
+        public void CalcProgress(int id)
+        {
+            User user = dal.GetUser(id);
+            Goal goal = GoalDal.getInstance().GetGoalById(user.GoalID.Value);
+
+        }
+
+        public User checkLogin(string email, string password)
+        {
+            User res = null;
+
+            User user = dal.GetUserByEmail(email);
+            if (user!= null && user.Password != null)
+                res= user.Password.Equals(password) ? user : null;
+
+            return res;
+        }
     }
 }

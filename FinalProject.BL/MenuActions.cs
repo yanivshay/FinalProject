@@ -28,9 +28,14 @@ namespace FinalProject.BL
             return _instance;
         }
 
-        public int InsertOrUpdateMenu(Menu value)
+        public Menu InsertMenu(Menu value)
         {
-            return dal.InsertOrUpdateMenu(value);
+            return dal.InsertMenu(value);
+        }
+
+        public Menu IncreasePickRate(Menu value)
+        {
+            return dal.IncreasePickRate(value);
         }
 
         public Menu GetMenuById(int id)

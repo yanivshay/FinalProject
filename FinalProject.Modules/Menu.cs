@@ -7,6 +7,7 @@ namespace FinalProject.Modules
     public class Menu
     {
         public int MenuID { get; set; }
+        public int PickRate { get; set; }
 
         public List<Food> Breakfast { get; set; }
         public List<Food> Lunch { get; set; }
@@ -26,15 +27,18 @@ namespace FinalProject.Modules
 
         public double MenuFitness { get; set; }
 
-        public Menu()
+        public Menu(int pickRate)
         {
+            this.PickRate = pickRate;
+
             Breakfast = new List<Food>();
             Lunch = new List<Food>();
             Dinner = new List<Food>();
         }
 
-        public Menu(int menuId)
+        public Menu(int menuId, int pickRate)
         {
+            this.PickRate = pickRate;
             this.MenuID = menuId;
             
             Breakfast = new List<Food>();

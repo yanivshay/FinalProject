@@ -6,29 +6,29 @@ namespace FinalProject.Modules
     public class Goal
     {
         public int GoalID { get; set; }
-        public double Weight { get; set; }
+        public double GoalWeight { get; set; }
         public double BodyFat { get; set; }
-        public double SuccessRate { get; set; }
+        public double StartingWeight { get; set; }
         public Nullable<int> MenuID { get; set; }
 
         public Goal()
         {
         }
 
-        public Goal(int goalId, double weight, double bodyFat, double successRate, int menuId)
+        public Goal(int goalId, double goalweight, double bodyFat, double startingweight, int menuId)
         {
             this.GoalID = goalId;
-            this.Weight = weight;
+            this.GoalWeight = goalweight;
             this.BodyFat = bodyFat;
-            this.SuccessRate = successRate;
+            this.StartingWeight = startingweight;
             this.MenuID = menuId;
         }
 
-        public Goal(double weight, double bodyFat, double successRate, int menuId)
+        public Goal(double weight, double bodyFat, double startingweight, int menuId)
         {
-            this.Weight = weight;
+            this.GoalWeight = weight;
             this.BodyFat = bodyFat;
-            this.SuccessRate = successRate;
+            this.StartingWeight = startingweight;
             this.MenuID = menuId;
         }
 
@@ -41,7 +41,7 @@ namespace FinalProject.Modules
         {
             get
             {
-                return this.Weight * 2;
+                return this.GoalWeight * 2;
             }
         }
 
@@ -50,15 +50,15 @@ namespace FinalProject.Modules
         {
             get
             {
-                return this.Weight * 1;
+                return this.GoalWeight * 1;
             }
         }
 
         public double NeededCalories(User usr)
         {
-            if (usr.Measurement.Weight > this.Weight)
+            if (usr.Measurement.Weight > this.GoalWeight)
                 return usr.Rmr - 300;
-            else if (usr.Measurement.Weight < this.Weight)
+            else if (usr.Measurement.Weight < this.GoalWeight)
                 return usr.Rmr + 300;
             else
                 return usr.Rmr;

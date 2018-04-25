@@ -26,9 +26,19 @@ namespace FinalProject.WebApi.Controllers
         }
 
         // POST values
-        public int Post([FromBody]Menu value)
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.ActionName("Insert")]
+        public Menu Insert([FromBody]Menu value)
         {
-            return bl.InsertOrUpdateMenu(value);
+            return bl.InsertMenu(value);
+        }
+
+        // POST values
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.ActionName("IncreasePickRate")]
+        public Menu IncreasePickRate([FromBody]Menu value)
+        {
+            return bl.InsertMenu(value);
         }
 
         // DELETE values/5

@@ -35,15 +35,10 @@ namespace FinalProject.DAL
             connection.Dispose();
         }
 
-        public int InsertOrUpdateMenu(Menu menu)
+        public Menu IncreasePickRate(Menu menu)
         {
-            //Create the SQL Query for inserting an menu
-            string createQuery = String.Format("Insert into Menues;"
-            + "Select @@Identity");
-
-            string updateQuery = "";
-            //string updateQuery = String.Format("Update Menues SET Name='{0}', Protein={1} ,Fat={2}, Calories={3}, Carbohydrates={4}, Category={5} Where FoodID = {6};",
-            //food.Name, food.Protein, food.Fat, food.Calories, food.Carbohydrates, food.Category, food.FoodID);
+            string updateQuery = String.Format("Update Menues SET PickRate={0} Where MenuID = {1};",
+            menu.PickRate+1, menu.MenuID);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -52,38 +47,113 @@ namespace FinalProject.DAL
             //Create a Command object
             SqlCommand command = null; // new SqlCommand(createQuery, connection);
 
-            if (menu.MenuID != 0)
-                command = new SqlCommand(updateQuery, connection);
-            else
-                command = new SqlCommand(createQuery, connection);
-
-            int savedMenuID = 0;
+            command = new SqlCommand(updateQuery, connection);
 
             try
             {
                 //Execute the command to SQL Server and return the newly created ID
                 var commandResult = command.ExecuteScalar();
-                if (commandResult != null)
-                {
-                    savedMenuID = Convert.ToInt32(commandResult);
-                }
-                else
-                {
-                    //the update SQL query will not return the primary key but if doesn't throw exception 
-                    //then we will take it from the already provided data
-                    savedMenuID = menu.MenuID;
-                }
+                menu.PickRate = menu.PickRate + 1;
             }
             catch (Exception)
             {
-                //there was a problem executing the script
+                return null;
             }
 
             //Close and dispose
             CloseAndDispose(command, connection);
 
             // Set return value
-            return savedMenuID;
+            return menu;
+        }
+
+        public Menu InsertMenu(Menu menu)
+        {
+            MealTypeDal mt_dal = MealTypeDal.getInstance();
+            MealsInMenuDal mim_dal = MealsInMenuDal.getInstance();
+
+            int mt_id;
+            
+            //Create the SQL Query for inserting an menu
+            string createQuery = String.Format("Insert into Menues (PickRate) Values({0});"
+            + "Select @@Identity", 1);
+            
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            //Create a Command object
+            SqlCommand command = null; // new SqlCommand(createQuery, connection);
+
+            command = new SqlCommand(createQuery, connection);
+            
+            try
+            {
+                //Execute the command to SQL Server and return the newly created ID
+                var commandResult = command.ExecuteScalar();
+                if (commandResult != null)
+                {
+                    menu.MenuID = Convert.ToInt32(commandResult);
+
+                    foreach (var item in menu.Breakfast)
+                    {
+                        mt_id = mt_dal.InsertOrUpdateMealType(new MealType()
+                        {
+                            FoodID = item.FoodID,
+                            Type = (int)MealTypeENUM.Breakfast
+                        });
+
+                        mim_dal.InsertOrUpdateMealsInMenu(new MealsInMenu()
+                        {
+                            MealTypeID = mt_id,
+                            MenuID = menu.MenuID
+                        });
+                    }
+                    foreach(var item in menu.Lunch)
+                    {
+                        mt_id = mt_dal.InsertOrUpdateMealType(new MealType()
+                        {
+                            FoodID = item.FoodID,
+                            Type = (int)MealTypeENUM.Lunch
+                        });
+
+                        mim_dal.InsertOrUpdateMealsInMenu(new MealsInMenu()
+                        {
+                            MealTypeID = mt_id,
+                            MenuID = menu.MenuID
+                        });
+                    }
+                    foreach(var item in menu.Dinner)
+                    {
+                        mt_id = mt_dal.InsertOrUpdateMealType(new MealType()
+                        {
+                            FoodID = item.FoodID,
+                            Type = (int)MealTypeENUM.Dinner
+                        });
+
+                        mim_dal.InsertOrUpdateMealsInMenu(new MealsInMenu()
+                        {
+                            MealTypeID = mt_id,
+                            MenuID = menu.MenuID
+                        });
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            //Close and dispose
+            CloseAndDispose(command, connection);
+
+            // Set return value
+            return menu;
         }
 
         public Menu GetMenuById(int menuId)
@@ -177,45 +247,7 @@ namespace FinalProject.DAL
 
             return result;
         }
-
-
-        /*public Menu GetMenuWithOrder(int menuId)
-        {
-            Menu result = new Menu(menuId);
-
-            List<MealsInMenu> MealsInMenu = 
-                MealsInMenuDal.getInstance().GetMealsInMenuByMenuId(menuId);
-
-            foreach (var meal in MealsInMenu)
-            {
-                Food food = 
-                    FoodDal.getInstance().GetFoodById(mt.FoodID);
-                MealType mt = 
-                    MealTypeDal.getInstance().GetMealTypeById(meal.MealTypeID);
-
-                switch (mt.Type)
-	            {
-                    case MealTypeENUM.Breakfast:
-                    {
-                        result.Breakfast.Add(food);
-                    }
-                    case MealTypeENUM.Lunch:
-                    {
-                        result.Lunch.Add(food);
-                    }
-                    case MealTypeENUM.Dinner:
-                    {
-                        result.Dinner.Add(food);
-                    }
-
-		            default:
-	            }
-
-            }
-            
-            return result;
-        }*/
-
+        
         public Menu GetMenu(int menuId)
         {
             Menu result = new Menu(menuId);
@@ -273,6 +305,8 @@ namespace FinalProject.DAL
 
                 }
             }
+            else
+                return null;
 
             //Close and dispose
             CloseAndDispose(command, connection);
@@ -355,6 +389,10 @@ namespace FinalProject.DAL
                     }
 
                 }
+            }
+            else
+            {
+                return null;
             }
 
             //Close and dispose

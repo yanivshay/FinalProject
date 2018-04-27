@@ -92,6 +92,7 @@ namespace FinalProject.Modules
 
         public Menu(Menu menu)
         {
+            this.PickRate = 0;
             this.Breakfast = new List<Food>();
             this.Lunch = new List<Food>();
             this.Dinner = new List<Food>();

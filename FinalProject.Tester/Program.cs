@@ -78,6 +78,19 @@ namespace FinalProject.Tester
                 GoalID = 0
             };
 
+            
+            Menu menu = new Menu(0);
+            menu.Breakfast.Add(food_dal.GetFoodById(1));
+            menu.Breakfast.Add(food_dal.GetFoodById(2));
+            menu.Breakfast.Add(food_dal.GetFoodById(3));
+            menu.Lunch.Add(food_dal.GetFoodById(3));
+            menu.Lunch.Add(food_dal.GetFoodById(4));
+            menu.Lunch.Add(food_dal.GetFoodById(5));
+            menu.Dinner.Add(food_dal.GetFoodById(6));
+            menu.Dinner.Add(food_dal.GetFoodById(7));
+            menu.Dinner.Add(food_dal.GetFoodById(8));
+
+            menu_dal.InsertMenu(menu);
 
 
             //bool isLoginOK = UserActions.getInstance().checkLogin("yaa@gmail.com", "ppa123");

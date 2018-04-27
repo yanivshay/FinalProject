@@ -97,11 +97,7 @@ namespace FinalProject.DAL
 
                     foreach (var item in menu.Breakfast)
                     {
-                        mt_id = mt_dal.InsertOrUpdateMealType(new MealType()
-                        {
-                            FoodID = item.FoodID,
-                            Type = (int)MealTypeENUM.Breakfast
-                        });
+                        mt_id = mt_dal.GetMealType((int)MealTypeENUM.Breakfast, item.FoodID).MealTypeID;
 
                         mim_dal.InsertOrUpdateMealsInMenu(new MealsInMenu()
                         {
@@ -111,11 +107,7 @@ namespace FinalProject.DAL
                     }
                     foreach(var item in menu.Lunch)
                     {
-                        mt_id = mt_dal.InsertOrUpdateMealType(new MealType()
-                        {
-                            FoodID = item.FoodID,
-                            Type = (int)MealTypeENUM.Lunch
-                        });
+                        mt_id = mt_dal.GetMealType((int)MealTypeENUM.Lunch, item.FoodID).MealTypeID;
 
                         mim_dal.InsertOrUpdateMealsInMenu(new MealsInMenu()
                         {
@@ -125,11 +117,12 @@ namespace FinalProject.DAL
                     }
                     foreach(var item in menu.Dinner)
                     {
-                        mt_id = mt_dal.InsertOrUpdateMealType(new MealType()
-                        {
-                            FoodID = item.FoodID,
-                            Type = (int)MealTypeENUM.Dinner
-                        });
+                        mt_id = mt_dal.GetMealType((int)MealTypeENUM.Dinner, item.FoodID).MealTypeID;
+                        //InsertOrUpdateMealType(new MealType()
+                        //{
+                        //    FoodID = item.FoodID,
+                        //    Type = (int)MealTypeENUM.Dinner
+                        //});
 
                         mim_dal.InsertOrUpdateMealsInMenu(new MealsInMenu()
                         {
@@ -144,7 +137,7 @@ namespace FinalProject.DAL
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception Ex)
             {
                 return null;
             }

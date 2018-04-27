@@ -28,6 +28,15 @@ namespace FinalProject.BL
             return _instance;
         }
 
+        public bool UpdateUsersMenu(int userId, Menu menu)
+        {
+            Goal goal = dal.GetUser(userId).Goal;
+            goal.MenuID = menu.MenuID;
+            int resId = GoalDal.getInstance().InsertOrUpdateGoal(goal);
+
+            return (resId != 0) ? true : false;
+        }
+
         public int InsertOrUpdateUser(User value)
         {
             return dal.InsertOrUpdateUser(value);

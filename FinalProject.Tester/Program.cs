@@ -82,15 +82,23 @@ namespace FinalProject.Tester
             Menu menu = new Menu(0);
             menu.Breakfast.Add(food_dal.GetFoodById(1));
             menu.Breakfast.Add(food_dal.GetFoodById(2));
-            menu.Breakfast.Add(food_dal.GetFoodById(3));
-            menu.Lunch.Add(food_dal.GetFoodById(3));
-            menu.Lunch.Add(food_dal.GetFoodById(4));
-            menu.Lunch.Add(food_dal.GetFoodById(5));
+            menu.Breakfast.Add(food_dal.GetFoodById(13));
+            menu.Lunch.Add(food_dal.GetFoodById(7));
+            menu.Lunch.Add(food_dal.GetFoodById(8));
+            menu.Lunch.Add(food_dal.GetFoodById(9));
             menu.Dinner.Add(food_dal.GetFoodById(6));
-            menu.Dinner.Add(food_dal.GetFoodById(7));
-            menu.Dinner.Add(food_dal.GetFoodById(8));
+            menu.Dinner.Add(food_dal.GetFoodById(12));
+            menu.Dinner.Add(food_dal.GetFoodById(13));
 
-            menu_dal.InsertMenu(menu);
+            //menu_dal.InsertMenu(menu);
+
+            //Menu menucheck = menu_dal.GetMenuById(1); // WORKS
+            //Menu menucheck2 = menu_dal.GetMenu(8); // WORKS
+            //List<Menu> menucheck3 = menu_dal.GetMenues(); // WORKS
+            //menu_dal.InsertMenu(menu);
+            Menu menucheck2 = menu_dal.GetMenu(10);
+            //menucheck2 = menu_dal.IncreasePickRate(menucheck2);
+
 
 
             //bool isLoginOK = UserActions.getInstance().checkLogin("yaa@gmail.com", "ppa123");

@@ -14,6 +14,7 @@ namespace FinalProject.WebApi.Controllers
         FoodActions bl = FoodActions.getInstance();
 
         // GET values
+        [System.Web.Http.HttpGet]
         public List<Food> Get()
         {
             return bl.GetFoods();

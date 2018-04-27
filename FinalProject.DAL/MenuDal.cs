@@ -158,7 +158,7 @@ namespace FinalProject.DAL
 
         public Menu GetMenuById(int menuId)
         {
-            Menu result = new Menu(0);
+            Menu result = new Menu(0,0);
 
             //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = String.Format("select * from Menues where MenuID={0}", menuId);
@@ -177,6 +177,7 @@ namespace FinalProject.DAL
                 while (dataReader.Read())
                 {
                     result.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    result.PickRate = Convert.ToInt32(dataReader["PickRate"]);
                 }
             }
 
@@ -209,7 +210,7 @@ namespace FinalProject.DAL
             {
                 while (dataReader.Read())
                 {
-                    menu = new Menu(0);
+                    menu = new Menu(0,0);
 
                     menu.MenuID = Convert.ToInt32(dataReader["MenuID"]);
 
@@ -250,12 +251,12 @@ namespace FinalProject.DAL
         
         public Menu GetMenu(int menuId)
         {
-            Menu result = new Menu(menuId);
+            Menu result = GetMenuById(menuId);
             Food food;
 
             //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = String.Format(
-                "select FI.FoodID as FoodID, FI.Name as Name, FI.Protein as Protein, FI.Fat as Fat, " + 
+                "select FI.FoodID as FoodID, FI.Name as Name, FI.Protein as Protein, FI.Fat as Fat, " +
                 "FI.Carbohydrates as Carbohydrates, FI.Calories as Calories, MT.MealType as Type" +
                 " from Menues M, MealsInMenues MIM, MealTypes MT, Foods FI where" + 
                 " M.MenuID = {0} AND M.MenuID = MIM.MenuID AND MIM.MealTypeID = MT.MealTypeID AND MT.FoodID = FI.FoodID", menuId);
@@ -345,7 +346,7 @@ namespace FinalProject.DAL
 
                     if (!results.Exists(x=> x.MenuID == menuID))
                     {
-                        menu = new Menu(menuID);
+                        menu = GetMenuById(menuID);
                         isNotExists = true;
                     }
                     else

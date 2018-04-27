@@ -19,8 +19,14 @@ namespace FinalProject.WebApi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional, action = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi1",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional, action = RouteParameter.Optional }
             );
 
             config.Formatters.Add(new BrowserJsonFormatter());

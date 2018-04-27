@@ -16,21 +16,10 @@ namespace FinalProject.WebApi
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "{controller}/{id}",
-<<<<<<< HEAD
-                defaults: new { id = RouteParameter.Optional }
-=======
-                defaults: new { id = RouteParameter.Optional, action = RouteParameter.Optional }
-            );
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi1",
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional, action = RouteParameter.Optional }
->>>>>>> 4f3db461413bdeba80fb045a465675e2e033c461
             );
 
             config.Formatters.Add(new BrowserJsonFormatter());

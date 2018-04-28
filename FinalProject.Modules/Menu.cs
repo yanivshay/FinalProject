@@ -24,7 +24,10 @@ namespace FinalProject.Modules
                 return f;
             }
         }
+        public Menu()
+        {
 
+        }
         public double MenuFitness { get; set; }
 
         public Menu(int pickRate)

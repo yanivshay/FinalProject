@@ -25,6 +25,14 @@ namespace FinalProject.WebApi.Controllers
         {
             return bl.GetUserById(id);
         }
+        
+        // POST values
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.ActionName("InsertOrUpdate")]
+        public int InsertOrUpdate([FromBody]User value)
+        {
+            return bl.InsertOrUpdateUser(value);
+        }
 
         // POST values
         [System.Web.Http.HttpPost]

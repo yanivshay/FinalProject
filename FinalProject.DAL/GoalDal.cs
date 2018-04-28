@@ -30,20 +30,27 @@ namespace FinalProject.DAL
         public int InsertOrUpdateGoal(Goal goal)
         {
             //Create the SQL Query for inserting an goal
-            string createQuery = String.Format("Insert into Goals (GoalWeight, BodyFat ,StartingWeight) Values({0}, {1}, {2});"
-            + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight);
+            string createQuery = "";
+
+            if (goal.CreationDate == null)
+            {
+                goal.CreationDate = DateTime.Now;
+                createQuery = String.Format("Insert into Goals (GoalWeight, BodyFat ,StartingWeight, UserID, CreationDate) Values({0}, {1}, {2}, {3}, '{4}');"
+                    + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd"));
+            }
+            
 
             string updateQuery = "";
 
             if (goal.MenuID == null || goal.MenuID == 0)
             {
-                updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2} Where GoalID = {3};",
-                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.GoalID);
+                updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, UserID={3}, CreationDate='{4}' Where GoalID = {5};",
+                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd"), goal.GoalID);
             }
             else
             {
-                updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, MenuID={3} Where GoalID = {4};",
-                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.GoalID);
+                updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, MenuID={3}, UserID={4}, CreationDate='{5}' Where GoalID = {6};",
+                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd"), goal.GoalID);
             }
 
             
@@ -113,6 +120,8 @@ namespace FinalProject.DAL
                     result.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
                     result.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
                     result.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
+                    result.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    result.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
 
                     if (Convert.IsDBNull(dataReader["MenuID"]))
                     {
@@ -161,6 +170,51 @@ namespace FinalProject.DAL
                     goal.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
                     goal.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
                     goal.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    goal.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    goal.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
+
+                    result.Add(goal);
+                }
+            }
+
+            // Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
+        public List<Goal> GetGoalsByUserId(int userId)
+        {
+            List<Goal> result = new List<Goal>();
+
+            //Create the SQL Query for returning all the goals
+            string sqlQuery = String.Format("select * from Goals where UserID={0}", userId);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            //Create DataReader for storing the returning table into server memory
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            Goal goal = null;
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    goal = new Goal();
+
+                    goal.GoalID = Convert.ToInt32(dataReader["GoalID"]);
+                    goal.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
+                    goal.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
+                    goal.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
+                    goal.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    goal.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    goal.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
 
                     result.Add(goal);
                 }

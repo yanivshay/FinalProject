@@ -49,21 +49,14 @@ namespace FinalProject.BL
 
         public List<User> GetUsers()
         {
-            return dal.GetUsers();
+            return null; //dal.GetUsers();
         }
 
         public bool DeleteUser(int id)
         {
             return dal.DeleteUser(id);
         }
-
-        public void CalcProgress(int id)
-        {
-            User user = dal.GetUser(id);
-            Goal goal = GoalDal.getInstance().GetGoalById(user.GoalID.Value);
-
-        }
-
+        
         public User checkLogin(string email, string password)
         {
             User res = null;

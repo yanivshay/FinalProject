@@ -26,7 +26,7 @@ namespace FinalProject.WebApi.Controllers
         }
 
         // POST values
-        public int Post([FromBody]Measurement value)
+        public Measurement Post([FromBody]Measurement value)
         {
             return bl.InsertOrUpdateMeasurement(value);
         }

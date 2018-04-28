@@ -28,7 +28,7 @@ namespace FinalProject.BL
             return _instance;
         }
 
-        public int InsertOrUpdateMeasurement(Measurement value)
+        public Measurement InsertOrUpdateMeasurement(Measurement value)
         {
             return dal.InsertOrUpdateMeasurement(value);
         }

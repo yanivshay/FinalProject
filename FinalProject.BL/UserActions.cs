@@ -56,6 +56,11 @@ namespace FinalProject.BL
         {
             return dal.DeleteUser(id);
         }
+
+        public bool IsUserExists(string email)
+        {
+            return dal.IsUserExists(email);
+        }
         
         public User checkLogin(string email, string password)
         {

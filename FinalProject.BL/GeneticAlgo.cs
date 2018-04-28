@@ -99,7 +99,7 @@ namespace FinalProject.BL
             menuPopulation = menuPopulation.Concat(res).ToList();
 
             int randomMutation = random.Next(2, 4);
-
+            Food tmpRM, tmpNew;
             for (int i = 0; i < randomMutation; i++)
             {
                 int randomMutationIndex = random.Next(0, menuPopulation.Count() - 1);
@@ -111,22 +111,34 @@ namespace FinalProject.BL
                     case MealTypeENUM.Breakfast:
                         {
                             int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Breakfast.Count - 1);
+                            tmpRM = menuPopulation[randomMutationIndex].Breakfast[randomFood1];
                             menuPopulation[randomMutationIndex].Breakfast.RemoveAt(randomFood1);
-                            menuPopulation[randomMutationIndex].Breakfast.Add(FoodDal.getInstance().GetRandFood(MealTypeENUM.Breakfast));
+                            tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Breakfast);
+                            while(tmpNew.FoodID == tmpRM.FoodID)
+                                tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Breakfast);
+                            menuPopulation[randomMutationIndex].Breakfast.Add(tmpNew);
                             break;
                         }
                     case MealTypeENUM.Lunch:
                         {
                             int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Lunch.Count - 1);
+                            tmpRM = menuPopulation[randomMutationIndex].Lunch[randomFood1];
                             menuPopulation[randomMutationIndex].Lunch.RemoveAt(randomFood1);
-                            menuPopulation[randomMutationIndex].Lunch.Add(FoodDal.getInstance().GetRandFood(MealTypeENUM.Lunch));
+                            tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Lunch);
+                            while (tmpNew.FoodID == tmpRM.FoodID)
+                                tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Lunch);
+                            menuPopulation[randomMutationIndex].Lunch.Add(tmpNew);
                             break;
                         }
                     case MealTypeENUM.Dinner:
                         {
                             int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Dinner.Count - 1);
+                            tmpRM = menuPopulation[randomMutationIndex].Dinner[randomFood1];
                             menuPopulation[randomMutationIndex].Dinner.RemoveAt(randomFood1);
-                            menuPopulation[randomMutationIndex].Dinner.Add(FoodDal.getInstance().GetRandFood(MealTypeENUM.Dinner));
+                            tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Dinner);
+                            while (tmpNew.FoodID == tmpRM.FoodID)
+                                tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Dinner);
+                            menuPopulation[randomMutationIndex].Dinner.Add(tmpNew);
                             break;
                         }
                 }
@@ -168,6 +180,7 @@ namespace FinalProject.BL
                 menuIndividual.MenuFitness += calculateRate(user.Goal.NeededCarbohydrates(user), menuIndividual.TotalCarbohydrates);
                 menuIndividual.MenuFitness += calculateRate(user.Goal.NeededFat, menuIndividual.TotalFat);
                 menuIndividual.MenuFitness += calculateRate(user.Goal.NeededProteins, menuIndividual.TotalProtien);
+                menuIndividual.MenuFitness += menuIndividual.PickRate * 0.01;
             }
         }
 

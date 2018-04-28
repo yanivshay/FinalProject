@@ -27,6 +27,14 @@ namespace FinalProject.WebApi.Controllers
         {
             return bl.GetUserById(id);
         }
+        
+        // POST values
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.ActionName("InsertOrUpdate")]
+        public int InsertOrUpdate([FromBody]User value)
+        {
+            return bl.InsertOrUpdateUser(value);
+        }
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.ActionName("NutritionGoals")]
@@ -66,6 +74,14 @@ namespace FinalProject.WebApi.Controllers
         public User Login([FromBody]LoginHelpClass info)
         {
             return bl.checkLogin(info.Email, info.Password);
+        }
+
+        // POST values
+        [System.Web.Http.ActionName("IsUserExists")]
+        [System.Web.Http.HttpGet]
+        public bool IsUserExists(string email)
+        {
+            return bl.IsUserExists(email);
         }
 
         // DELETE values/5

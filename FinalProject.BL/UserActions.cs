@@ -28,6 +28,15 @@ namespace FinalProject.BL
             return _instance;
         }
 
+        public bool UpdateUsersMenu(int userId, Menu menu)
+        {
+            Goal goal = dal.GetUser(userId).Goal;
+            goal.MenuID = menu.MenuID;
+            int resId = GoalDal.getInstance().InsertOrUpdateGoal(goal);
+
+            return (resId != 0) ? true : false;
+        }
+
         public int InsertOrUpdateUser(User value)
         {
             return dal.InsertOrUpdateUser(value);
@@ -54,7 +63,7 @@ namespace FinalProject.BL
 
         public List<User> GetUsers()
         {
-            return dal.GetUsers();
+            return null; //dal.GetUsers();
         }
 
         public bool DeleteUser(int id)
@@ -62,13 +71,11 @@ namespace FinalProject.BL
             return dal.DeleteUser(id);
         }
 
-        public void CalcProgress(int id)
+        public bool IsUserExists(string email)
         {
-            User user = dal.GetUser(id);
-            Goal goal = GoalDal.getInstance().GetGoalById(user.GoalID.Value);
-
+            return dal.IsUserExists(email);
         }
-
+        
         public User checkLogin(string email, string password)
         {
             User res = null;

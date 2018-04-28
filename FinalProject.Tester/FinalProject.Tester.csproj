@@ -121,6 +121,10 @@
       <Project>{3cf700a6-1b15-42d5-b870-3977115585f6}</Project>
       <Name>FinalProject.Modules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FinalProject.WebApi\FinalProject.WebApi.csproj">
+      <Project>{4ad0fba3-00dd-40ea-9ca3-11e7ec49d10e}</Project>
+      <Name>FinalProject.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

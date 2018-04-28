@@ -116,6 +116,38 @@ namespace FinalProject.DAL
             return result;
         }
 
+        public MealType GetMealType(int mtId, int foodId)
+        {
+            MealType result = new MealType();
+
+            //Create the SQL Query for returning an mt category based on its primary key
+            string sqlQuery = String.Format("select * from MealTypes where FoodID={0} and MealType={1}", foodId, mtId);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    result.MealTypeID = Convert.ToInt32(dataReader["MealTypeID"]);
+                    result.FoodID = Convert.ToInt32(dataReader["FoodID"]);
+                    result.Type = Convert.ToInt32(dataReader["MealType"]);
+                }
+            }
+
+            //Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
         public List<MealType> GetMealTypes()
         {
             List<MealType> result = new List<MealType>();

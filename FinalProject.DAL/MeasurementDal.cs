@@ -34,15 +34,14 @@ namespace FinalProject.DAL
             connection.Dispose();
         }
 
-        public int InsertOrUpdateMeasurement(Measurement msrmnt)
+        public Measurement InsertOrUpdateMeasurement(Measurement msrmnt)
         {
+            msrmnt.CreationDate = DateTime.Now;
+
             //Create the SQL Query for inserting an msrmnt
-            string createQuery = String.Format("Insert into Measurements (Weight, BodyFat) Values({0}, {1});"
-            + "Select @@Identity", msrmnt.Weight, msrmnt.BodyFat);
-
-            string updateQuery = String.Format("Update Measurements SET Weight={0}, BodyFat={1} Where MeasurementID = {2};",
-            msrmnt.Weight, msrmnt.BodyFat, msrmnt.MeasurementID);
-
+            string createQuery = String.Format("Insert into Measurements (Weight, BodyFat, UserID, CreationDate) Values({0}, {1}, {2}, '{3}');"
+            + "Select @@Identity", msrmnt.Weight, msrmnt.BodyFat, msrmnt.UserID, msrmnt.CreationDate.Value.ToString("yyyy-MM-dd"));
+            
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
             connection.Open();
@@ -50,38 +49,31 @@ namespace FinalProject.DAL
             //Create a Command object
             SqlCommand command = null; // new SqlCommand(createQuery, connection);
 
-            if (msrmnt.MeasurementID != 0)
-                command = new SqlCommand(updateQuery, connection);
-            else
-                command = new SqlCommand(createQuery, connection);
-
-            int savedMsrmntID = 0;
-
+            command = new SqlCommand(createQuery, connection);
+            
             try
             {
                 //Execute the command to SQL Server and return the newly created ID
                 var commandResult = command.ExecuteScalar();
                 if (commandResult != null)
                 {
-                    savedMsrmntID = Convert.ToInt32(commandResult);
+                    msrmnt.MeasurementID = Convert.ToInt32(commandResult);
                 }
                 else
                 {
-                    //the update SQL query will not return the primary key but if doesn't throw exception 
-                    //then we will take it from the already provided data
-                    savedMsrmntID = msrmnt.MeasurementID;
+                    return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //there was a problem executing the script
+                return null;
             }
 
             //Close and dispose
             CloseAndDispose(command, connection);
 
             // Set return value
-            return savedMsrmntID;
+            return msrmnt;
         }
 
         public Measurement GetMeasurementById(int msrmntId)
@@ -107,6 +99,8 @@ namespace FinalProject.DAL
                     result.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
                     result.Weight = Convert.ToDouble(dataReader["Weight"]);
                     result.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
+                    result.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    result.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
                 }
             }
 
@@ -144,6 +138,49 @@ namespace FinalProject.DAL
                     msrmnt.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
                     msrmnt.Weight = Convert.ToDouble(dataReader["Weight"]);
                     msrmnt.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
+                    msrmnt.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    msrmnt.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
+
+                    result.Add(msrmnt);
+                }
+            }
+
+            // Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
+        public List<Measurement> GetMeasurementsByUser(int userId)
+        {
+            List<Measurement> result = new List<Measurement>();
+
+            //Create the SQL Query for returning all the msrmnts
+            string sqlQuery = String.Format("select * from Measurements where UserID = {0}", userId);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            //Create DataReader for storing the returning table into server memory
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            Measurement msrmnt = null;
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    msrmnt = new Measurement();
+
+                    msrmnt.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
+                    msrmnt.Weight = Convert.ToDouble(dataReader["Weight"]);
+                    msrmnt.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
+                    msrmnt.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    msrmnt.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
 
                     result.Add(msrmnt);
                 }

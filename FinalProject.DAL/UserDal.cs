@@ -27,9 +27,39 @@ namespace FinalProject.DAL
             return _instance;
         }
 
+        private string UserSelecetQuery(int value)
+        {
+            string res = String.Format(
+                    "select U.UserID as UserID, U.FirstName as FirstName, U.LastName as LastName, " +
+                    "U.Gender as Gender, U.Birthday as Birthday, U.Height as Height, U.Email as Email, U.Password as Password, G.BodyFat as GoalBodyFat, " +
+                    "G.MenuID as MenuID, G.StartingWeight as StartingWeight, G.GoalWeight as GoalWeight, " +
+                    "M.BodyFat as MBodyFat, M.Weight as MWeight, M.CreationDate as MCreationDate, G.CreationDate as GCreationDate, M.MeasurementID as MeasurementID, G.GoalID as GoalID " +
+                    "from Goals G, Users U, Measurements M " +
+                    "where U.UserID = '{0}' AND U.UserID = G.UserID AND U.UserID = M.UserID and " +
+                    "G.CreationDate = (select Max(CreationDate) from Goals as G1 where U.UserID = G1.UserID) and " +
+                    "M.CreationDate = (select Max(CreationDate) from Measurements as M1 where U.UserID = M1.UserID) ", value);
+
+            return res;
+        }
+
+        private string UserSelecetQuery(string value)
+        {
+            string res = String.Format(
+                    "select U.UserID as UserID, U.FirstName as FirstName, U.LastName as LastName, " +
+                    "U.Gender as Gender, U.Birthday as Birthday, U.Height as Height, U.Email as Email, U.Password as Password, G.BodyFat as GoalBodyFat, " +
+                    "G.MenuID as MenuID, G.StartingWeight as StartingWeight, G.GoalWeight as GoalWeight, " +
+                    "M.BodyFat as MBodyFat, M.Weight as MWeight, M.CreationDate as MCreationDate, G.CreationDate as GCreationDate, M.MeasurementID as MeasurementID, G.GoalID as GoalID " +
+                    "from Goals G, Users U, Measurements M " +
+                    "where U.Email = '{0}' AND U.UserID = G.UserID AND U.UserID = M.UserID and " +
+                    "G.CreationDate = (select Max(CreationDate) from Goals as G1 where U.UserID = G1.UserID) and " +
+                    "M.CreationDate = (select Max(CreationDate) from Measurements as M1 where U.UserID = M1.UserID) ", value);
+            
+            return res;
+        }
+
         public int InsertOrUpdateUser(User user)
         {
-            user.MeasurementID = MeasurementDal.getInstance().InsertOrUpdateMeasurement(user.Measurement);
+            /*user.MeasurementID = MeasurementDal.getInstance().InsertOrUpdateMeasurement(user.Measurement);
             user.Measurement.MeasurementID = user.MeasurementID.Value;
 
             if (user.GoalID == null || user.GoalID == 0)
@@ -47,14 +77,14 @@ namespace FinalProject.DAL
                     user.GoalID = GoalDal.getInstance().InsertOrUpdateGoal(user.Goal);
                     user.Goal.GoalID = user.GoalID.Value;
                 }
-            }
+            }*/
             
             //Create the SQL Query for inserting an user
-            string createQuery = String.Format("Insert into Users (FirstName, LastName ,MeasurementID, Birthday, Height, Gender, GoalID, Email, Password) Values('{0}', '{1}', {2}, '{3}', {4}, {5}, {6}, '{7}', '{8}');"
-            + "Select @@Identity", user.FirstName, user.LastName, user.MeasurementID, user.Birthday.ToString("yyyy-MM-dd"), user.Height, user.Gender, user.GoalID, user.Email, user.Password);
+            string createQuery = String.Format("Insert into Users (FirstName, LastName, Birthday, Height, Gender, Email, Password) Values('{0}', '{1}', '{2}', {3}, {4}, '{5}', '{6}');"
+            + "Select @@Identity", user.FirstName, user.LastName, user.Birthday.ToString("yyyy-MM-dd"), user.Height, user.Gender, user.Email, user.Password);
 
-            string updateQuery = String.Format("Update Users SET FirstName='{0}', LastName='{1}' ,MeasurementID={2}, Birthday='{3}', Height={4}, Gender={5}, GoalID={6}, Email='{7}', Password='{8}' Where UserID = {9};",
-            user.FirstName, user.LastName, user.MeasurementID, user.Birthday.ToString("yyyy-MM-dd"), user.Height, user.Gender, user.GoalID, user.Email, user.Password, user.UserID);
+            string updateQuery = String.Format("Update Users SET FirstName='{0}', LastName='{1}' , Birthday='{2}', Height={3}, Gender={4}, Email='{5}', Password='{6}' Where UserID = {7};",
+            user.FirstName, user.LastName, user.Birthday.ToString("yyyy-MM-dd"), user.Height, user.Gender, user.Email, user.Password, user.UserID);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -88,6 +118,11 @@ namespace FinalProject.DAL
                     //then we will take it from the already provided data
                     savedUserID = user.UserID;
                 }
+
+                user.Goal.UserID = savedUserID;
+                user.Measurement.UserID = savedUserID;
+                GoalDal.getInstance().InsertOrUpdateGoal(user.Goal);
+                MeasurementDal.getInstance().InsertOrUpdateMeasurement(user.Measurement);
             }
             catch (Exception ex)
             {
@@ -142,110 +177,72 @@ namespace FinalProject.DAL
             return isExist;
         }
 
-        public User GetUserById(int userId)
-        {
-            User result = new User();
+        
 
-            //Create the SQL Query for returning an user category based on its primary key
-            string sqlQuery = String.Format("select * from Users where UserID={0}", userId);
+        //public List<User> GetUsers()
+        //{
+        //    List<User> result = new List<User>();
 
-            //Create and open a connection to SQL Server 
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
-            connection.Open();
+        //    //Create the SQL Query for returning all the users
+        //    string sqlQuery = String.Format("select * from Users");
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
+        //    //Create and open a connection to SQL Server 
+        //    SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+        //    connection.Open();
 
-            SqlDataReader dataReader = command.ExecuteReader();
+        //    SqlCommand command = new SqlCommand(sqlQuery, connection);
 
-            //load into the result object the returned row from the database
-            if (dataReader.HasRows)
-            {
-                while (dataReader.Read())
-                {
-                    result.UserID = Convert.ToInt32(dataReader["UserID"]);
-                    result.FirstName = Convert.ToString(dataReader["FirstName"]);
-                    result.LastName = Convert.ToString(dataReader["LastName"]);
-                    result.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
-                    result.Birthday = Convert.ToDateTime(dataReader["Birthday"]);
-                    result.Height = Convert.ToDouble(dataReader["Height"]);
-                    result.Gender = Convert.ToInt32(dataReader["Gender"]);
-                    result.GoalID = Convert.ToInt32(dataReader["GoalID"]);
-                    result.Email = Convert.ToString(dataReader["Email"]);
-                    result.Password = Convert.ToString(dataReader["Password"]);
-                }
-            }
+        //    //Create DataReader for storing the returning table into server memory
+        //    SqlDataReader dataReader = command.ExecuteReader();
 
-            //Close and dispose
-            CloseAndDispose(command, connection);
-            dataReader.Close();
+        //    User user = null;
 
-            return result;
-        }
+        //    //load into the result object the returned row from the database
+        //    if (dataReader.HasRows)
+        //    {
+        //        while (dataReader.Read())
+        //        {
+        //            user = new User();
 
-        public List<User> GetUsers()
-        {
-            List<User> result = new List<User>();
+        //            user.UserID = Convert.ToInt32(dataReader["UserID"]);
+        //            user.FirstName = Convert.ToString(dataReader["FirstName"]);
+        //            user.LastName = Convert.ToString(dataReader["LastName"]);
+        //            user.Birthday = Convert.ToDateTime(dataReader["Birthday"]);
+        //            user.Height = Convert.ToDouble(dataReader["Height"]);
+        //            user.Gender = Convert.ToInt32(dataReader["Gender"]);
+        //            user.Email = Convert.ToString(dataReader["Email"]);
+        //            user.Password = Convert.ToString(dataReader["Password"]);
 
-            //Create the SQL Query for returning all the users
-            string sqlQuery = String.Format("select * from Users");
+        //            if (Convert.IsDBNull(dataReader["GoalID"]))
+        //            {
+        //                user.GoalID = null;
+        //            }
+        //            else
+        //            {
+        //                user.GoalID = Convert.ToInt32(dataReader["GoalID"]);
+        //                user.Goal = GoalDal.getInstance().GetGoalById(user.GoalID.Value);
+        //            }
 
-            //Create and open a connection to SQL Server 
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
-            connection.Open();
+        //            if (Convert.IsDBNull(dataReader["MeasurementID"]))
+        //            {
+        //                user.MeasurementID = null;
+        //            }
+        //            else
+        //            {
+        //                user.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
+        //                user.Measurement = MeasurementDal.getInstance().GetMeasurementById(user.MeasurementID.Value);
+        //            }
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
+        //            result.Add(user);
+        //        }
+        //    }
 
-            //Create DataReader for storing the returning table into server memory
-            SqlDataReader dataReader = command.ExecuteReader();
+        //    // Close and dispose
+        //    CloseAndDispose(command, connection);
+        //    dataReader.Close();
 
-            User user = null;
-
-            //load into the result object the returned row from the database
-            if (dataReader.HasRows)
-            {
-                while (dataReader.Read())
-                {
-                    user = new User();
-
-                    user.UserID = Convert.ToInt32(dataReader["UserID"]);
-                    user.FirstName = Convert.ToString(dataReader["FirstName"]);
-                    user.LastName = Convert.ToString(dataReader["LastName"]);
-                    user.Birthday = Convert.ToDateTime(dataReader["Birthday"]);
-                    user.Height = Convert.ToDouble(dataReader["Height"]);
-                    user.Gender = Convert.ToInt32(dataReader["Gender"]);
-                    user.Email = Convert.ToString(dataReader["Email"]);
-                    user.Password = Convert.ToString(dataReader["Password"]);
-
-                    if (Convert.IsDBNull(dataReader["GoalID"]))
-                    {
-                        user.GoalID = null;
-                    }
-                    else
-                    {
-                        user.GoalID = Convert.ToInt32(dataReader["GoalID"]);
-                        user.Goal = GoalDal.getInstance().GetGoalById(user.GoalID.Value);
-                    }
-
-                    if (Convert.IsDBNull(dataReader["MeasurementID"]))
-                    {
-                        user.MeasurementID = null;
-                    }
-                    else
-                    {
-                        user.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
-                        user.Measurement = MeasurementDal.getInstance().GetMeasurementById(user.MeasurementID.Value);
-                    }
-
-                    result.Add(user);
-                }
-            }
-
-            // Close and dispose
-            CloseAndDispose(command, connection);
-            dataReader.Close();
-
-            return result;
-        }
+        //    return result;
+        //}
 
         public bool DeleteUser(int UserID)
         {
@@ -274,101 +271,29 @@ namespace FinalProject.DAL
 
         public User GetUser(int userId)
         {
-            User result = new User();
-
             //Create the SQL Query for returning an user category based on its primary key
-            string sqlQuery = String.Format(
-                "select U.UserID as UserID, U.FirstName as FirstName, U.LastName as LastName, " +
-                "U.Gender as Gender, U.Birthday as Birthday, U.GoalID as GoalID, U.Height as Height, " +
-                "U.MeasurementID as MeasurementID, U.Email as Email, U.Password as Password, G.BodyFat as GoalBodyFat, " +
-                "G.MenuID as MenuID, G.StartingWeight as StartingWeight, G.GoalWeight as GoalWeight, " +
-                "M.BodyFat as MBodyFat, M.Weight as MWeight " +
-                "from Goals G, Users U," +
-                " Measurements M " +
-                "where U.UserID = {0} AND U.GoalID = G.GoalID AND U.MeasurementID = M.MeasurementID",
-                userId);
+            string sqlQuery = UserSelecetQuery(userId);
 
-            //Create and open a connection to SQL Server 
-            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
-            connection.Open();
-
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
-
-            SqlDataReader dataReader = command.ExecuteReader();
-
-            //load into the result object the returned row from the database
-            if (dataReader.HasRows)
-            {
-                while (dataReader.Read())
-                {
-                    result.UserID = Convert.ToInt32(dataReader["UserID"]);
-                    result.FirstName = Convert.ToString(dataReader["FirstName"]);
-                    result.LastName = Convert.ToString(dataReader["LastName"]);
-                    result.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
-                    result.Birthday = Convert.ToDateTime(dataReader["Birthday"]);
-                    result.Height = Convert.ToDouble(dataReader["Height"]);
-                    result.Gender = Convert.ToInt32(dataReader["Gender"]);
-                    result.GoalID = Convert.ToInt32(dataReader["GoalID"]);
-                    result.Email = Convert.ToString(dataReader["Email"]);
-                    result.Password = Convert.ToString(dataReader["Password"]);
-
-                    Measurement msrmnt = new Measurement()
-                    {
-                        BodyFat = Convert.ToDouble(dataReader["MBodyFat"]),
-                        MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]),
-                        Weight = Convert.ToDouble(dataReader["MWeight"]),
-                    };
-
-                    Goal goal = new Goal()
-                    {
-                        GoalID = Convert.ToInt32(dataReader["GoalID"]),
-                        GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]),
-                        BodyFat = Convert.ToDouble(dataReader["GoalBodyFat"]),
-                        StartingWeight = Convert.ToDouble(dataReader["StartingWeight"])
-                    };
-
-                    if (Convert.IsDBNull(dataReader["MenuID"]))
-                    {
-                        goal.MenuID = null;
-                    }
-                    else
-                    {
-                        goal.MenuID = Convert.ToInt32(dataReader["MenuID"]);
-                    }
-
-                    result.Measurement = msrmnt;
-                    result.Goal = goal;
-                }
-            }
-
-            //Close and dispose
-            CloseAndDispose(command, connection);
-            dataReader.Close();
-
-            return result;
+            return GetUser(sqlQuery);
         }
         
         public User GetUserByEmail(string email)
         {
-            User result = new User();
-
             //Create the SQL Query for returning an user category based on its primary key
-            string sqlQuery = String.Format(
-                "select U.UserID as UserID, U.FirstName as FirstName, U.LastName as LastName, " +
-                "U.Gender as Gender, U.Birthday as Birthday, U.GoalID as GoalID, U.Height as Height, " +
-                "U.MeasurementID as MeasurementID, U.Email as Email, U.Password as Password, G.BodyFat as GoalBodyFat, " +
-                "G.MenuID as MenuID, G.StartingWeight as StartingWeight, G.GoalWeight as GoalWeight, " +
-                "M.BodyFat as MBodyFat, M.Weight as MWeight " +
-                "from Goals G, Users U," +
-                " Measurements M " +
-                "where U.Email = '{0}' AND U.GoalID = G.GoalID AND U.MeasurementID = M.MeasurementID",
-                email);
+            string sqlQuery = UserSelecetQuery(email);
+            
+            return GetUser(sqlQuery);
+        }
+
+        private User GetUser(string query)
+        {
+            User result = new User();
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
             connection.Open();
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            SqlCommand command = new SqlCommand(query, connection);
 
             SqlDataReader dataReader = command.ExecuteReader();
 
@@ -380,11 +305,9 @@ namespace FinalProject.DAL
                     result.UserID = Convert.ToInt32(dataReader["UserID"]);
                     result.FirstName = Convert.ToString(dataReader["FirstName"]);
                     result.LastName = Convert.ToString(dataReader["LastName"]);
-                    result.MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]);
                     result.Birthday = Convert.ToDateTime(dataReader["Birthday"]);
                     result.Height = Convert.ToDouble(dataReader["Height"]);
                     result.Gender = Convert.ToInt32(dataReader["Gender"]);
-                    result.GoalID = Convert.ToInt32(dataReader["GoalID"]);
                     result.Email = Convert.ToString(dataReader["Email"]);
                     result.Password = Convert.ToString(dataReader["Password"]);
 
@@ -393,6 +316,8 @@ namespace FinalProject.DAL
                         BodyFat = Convert.ToDouble(dataReader["MBodyFat"]),
                         MeasurementID = Convert.ToInt32(dataReader["MeasurementID"]),
                         Weight = Convert.ToDouble(dataReader["MWeight"]),
+                        UserID = Convert.ToInt32(dataReader["UserID"]),
+                        CreationDate = Convert.ToDateTime(dataReader["MCreationDate"])
                     };
 
                     Goal goal = new Goal()
@@ -400,7 +325,9 @@ namespace FinalProject.DAL
                         GoalID = Convert.ToInt32(dataReader["GoalID"]),
                         GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]),
                         BodyFat = Convert.ToDouble(dataReader["GoalBodyFat"]),
-                        StartingWeight = Convert.ToDouble(dataReader["StartingWeight"])
+                        StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]),
+                        UserID = Convert.ToInt32(dataReader["UserID"]),
+                        CreationDate = Convert.ToDateTime(dataReader["GCreationDate"])
                     };
 
                     if (Convert.IsDBNull(dataReader["MenuID"]))

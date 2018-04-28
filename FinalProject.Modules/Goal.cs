@@ -10,26 +10,30 @@ namespace FinalProject.Modules
         public double BodyFat { get; set; }
         public double StartingWeight { get; set; }
         public Nullable<int> MenuID { get; set; }
+        public int UserID { get; set; }
+        public Nullable<DateTime> CreationDate { get; set; }
 
         public Goal()
         {
         }
 
-        public Goal(int goalId, double goalweight, double bodyFat, double startingweight, int menuId)
+        public Goal(int goalId, double goalweight, double bodyFat, double startingweight, int menuId, int userId)
         {
             this.GoalID = goalId;
             this.GoalWeight = goalweight;
             this.BodyFat = bodyFat;
             this.StartingWeight = startingweight;
             this.MenuID = menuId;
+            this.UserID = userId;
         }
 
-        public Goal(double weight, double bodyFat, double startingweight, int menuId)
+        public Goal(double weight, double bodyFat, double startingweight, int menuId, int userId)
         {
             this.GoalWeight = weight;
             this.BodyFat = bodyFat;
             this.StartingWeight = startingweight;
             this.MenuID = menuId;
+            this.UserID = userId;
         }
 
         /// <summary>

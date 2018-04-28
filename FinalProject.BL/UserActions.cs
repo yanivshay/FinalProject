@@ -57,6 +57,11 @@ namespace FinalProject.BL
             return dal.DeleteUser(id);
         }
 
+        public bool IsUserExists(string email)
+        {
+            return dal.IsUserExists(email);
+        }
+
         public void CalcProgress(int id)
         {
             User user = dal.GetUser(id);

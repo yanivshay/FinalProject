@@ -59,6 +59,14 @@ namespace FinalProject.WebApi.Controllers
             return bl.checkLogin(info.Email, info.Password);
         }
 
+        // POST values
+        [System.Web.Http.ActionName("IsUserExists")]
+        [System.Web.Http.HttpGet]
+        public bool IsUserExists(string email)
+        {
+            return bl.IsUserExists(email);
+        }
+
         // DELETE values/5
         public bool Delete(int id)
         {

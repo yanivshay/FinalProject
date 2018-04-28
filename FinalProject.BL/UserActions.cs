@@ -38,6 +38,20 @@ namespace FinalProject.BL
             return dal.GetUser(id);
         }
 
+        public NutritionGoals getUserNutritionGoals(int id)
+        {
+            var user = dal.GetUser(id);
+            var nutritionGoals = new NutritionGoals()
+            {
+                Proteins = user.Goal.NeededProteins,
+                Fats = user.Goal.NeededFat,
+                Calories = user.Goal.NeededCalories(user),
+                Carbohydrates = user.Goal.NeededCarbohydrates(user)
+            };
+
+            return nutritionGoals;
+        }
+
         public List<User> GetUsers()
         {
             return dal.GetUsers();

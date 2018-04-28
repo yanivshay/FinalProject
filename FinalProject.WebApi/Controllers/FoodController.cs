@@ -20,10 +20,19 @@ namespace FinalProject.WebApi.Controllers
             return bl.GetFoods();
         }
 
+        [System.Web.Http.ActionName("GetByID")]
+        [System.Web.Http.HttpGet]
         // GET values/5
         public Food Get(int id)
         {
             return bl.GetFoodById(id);
+        }
+
+        [System.Web.Http.ActionName("SimilarFood")]
+        [System.Web.Http.HttpGet]
+        public List<Food> GetSimilarFood(int mealType)
+        {
+            return bl.GetSimilarFood(mealType);
         }
 
         // POST values

@@ -112,6 +112,50 @@ namespace FinalProject.DAL
             return result;
         }
 
+        public List<Food> GetSimilarFoods(int mealType)
+        {
+            List<Food> result = new List<Food>();
+
+            //Create the SQL Query for returning an article category based on its primary key
+            string sqlQuery = String.Format("select * " +
+                                            "from Foods " +
+                                            "where FoodID in (select FoodID from MealTypes where MealType = {0})", mealType);            
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            //Create DataReader for storing the returning table into server memory
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            Food food = null;
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    food = new Food();
+
+                    food.FoodID = Convert.ToInt32(dataReader["FoodID"]);
+                    food.Name = Convert.ToString(dataReader["Name"]);
+                    food.Protein = Convert.ToDouble(dataReader["Protein"]);
+                    food.Fat = Convert.ToDouble(dataReader["Fat"]);
+                    food.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
+                    food.Calories = Convert.ToDouble(dataReader["Calories"]);
+
+                    result.Add(food);
+                }
+            }
+
+            // Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
         public List<Food> GetFoods()
         {
             List<Food> result = new List<Food>();

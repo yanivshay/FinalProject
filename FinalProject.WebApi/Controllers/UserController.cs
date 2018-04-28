@@ -20,10 +20,19 @@ namespace FinalProject.WebApi.Controllers
             return bl.GetUsers();
         }
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.ActionName("User")]
         // GET values/5
         public User Get(int id)
         {
             return bl.GetUserById(id);
+        }
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.ActionName("NutritionGoals")]
+        public NutritionGoals getUserNutritionGoals(int id)
+        {
+            return bl.getUserNutritionGoals(id);
         }
 
         // POST values

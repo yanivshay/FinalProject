@@ -38,6 +38,11 @@ namespace FinalProject.BL
             return dal.GetFoodById(foodId);
         }
 
+        public List<Food> GetSimilarFood(int mealType)
+        {
+            return dal.GetSimilarFoods(mealType);
+        }
+
         public List<Food> GetFoods()
         {
             return dal.GetFoods();

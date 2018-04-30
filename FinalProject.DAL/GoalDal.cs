@@ -36,7 +36,7 @@ namespace FinalProject.DAL
             {
                 goal.CreationDate = DateTime.Now;
                 createQuery = String.Format("Insert into Goals (GoalWeight, BodyFat ,StartingWeight, UserID, CreationDate) Values({0}, {1}, {2}, {3}, '{4}');"
-                    + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd"));
+                    + "Select @@Identity", goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             
 
@@ -45,12 +45,12 @@ namespace FinalProject.DAL
             if (goal.MenuID == null || goal.MenuID == 0)
             {
                 updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, UserID={3}, CreationDate='{4}' Where GoalID = {5};",
-                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd"), goal.GoalID);
+                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd HH:mm:ss"), goal.GoalID);
             }
             else
             {
                 updateQuery = String.Format("Update Goals SET GoalWeight={0}, BodyFat={1} ,StartingWeight={2}, MenuID={3}, UserID={4}, CreationDate='{5}' Where GoalID = {6};",
-                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd"), goal.GoalID);
+                    goal.GoalWeight, goal.BodyFat, goal.StartingWeight, goal.MenuID, goal.UserID, goal.CreationDate.Value.ToString("yyyy-MM-dd HH:mm:ss"), goal.GoalID);
             }
 
             
@@ -102,6 +102,52 @@ namespace FinalProject.DAL
 
             //Create the SQL Query for returning an goal category based on its primary key
             string sqlQuery = String.Format("select * from Goals where GoalID={0}", goalId);
+
+            //Create and open a connection to SQL Server 
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
+            connection.Open();
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            SqlDataReader dataReader = command.ExecuteReader();
+
+            //load into the result object the returned row from the database
+            if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    result.GoalID = Convert.ToInt32(dataReader["GoalID"]);
+                    result.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
+                    result.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
+                    result.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
+                    result.UserID = Convert.ToInt32(dataReader["UserID"]);
+                    result.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
+
+                    if (Convert.IsDBNull(dataReader["MenuID"]))
+                    {
+                        result.MenuID = null;
+                    }
+                    else
+                    {
+                        result.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    }
+                }
+            }
+
+            //Close and dispose
+            CloseAndDispose(command, connection);
+
+            return result;
+        }
+
+
+        public Goal GetGoalByUserId(int UserId)
+        {
+            Goal result = new Goal();
+
+            //Create the SQL Query for returning an goal category based on its primary key
+            string sqlQuery = String.Format("select * from Goals as G where UserId={0} and " +
+                "G.CreationDate = (select Max(CreationDate) from Goals as G1 where G1.UserID ={0} )", UserId);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);

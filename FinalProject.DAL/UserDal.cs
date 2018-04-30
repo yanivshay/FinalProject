@@ -121,8 +121,8 @@ namespace FinalProject.DAL
 
                 user.Goal.UserID = savedUserID;
                 user.Measurement.UserID = savedUserID;
-                GoalDal.getInstance().InsertOrUpdateGoal(user.Goal);
                 MeasurementDal.getInstance().InsertOrUpdateMeasurement(user.Measurement);
+                GoalDal.getInstance().InsertOrUpdateGoal(user.Goal);
             }
             catch (Exception ex)
             {

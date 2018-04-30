@@ -40,7 +40,7 @@ namespace FinalProject.DAL
 
             //Create the SQL Query for inserting an msrmnt
             string createQuery = String.Format("Insert into Measurements (Weight, BodyFat, UserID, CreationDate) Values({0}, {1}, {2}, '{3}');"
-            + "Select @@Identity", msrmnt.Weight, msrmnt.BodyFat, msrmnt.UserID, msrmnt.CreationDate.Value.ToString("yyyy-MM-dd"));
+            + "Select @@Identity", msrmnt.Weight, msrmnt.BodyFat, msrmnt.UserID, msrmnt.CreationDate.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -155,8 +155,9 @@ namespace FinalProject.DAL
         {
             List<Measurement> result = new List<Measurement>();
 
+            Goal currGoal = GoalDal.getInstance().GetGoalByUserId(userId);
             //Create the SQL Query for returning all the msrmnts
-            string sqlQuery = String.Format("select * from Measurements where UserID = {0}", userId);
+            string sqlQuery = String.Format("select * from Measurements where UserID = {0} and CreationDate >= '{1}'", userId, currGoal.CreationDate);
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);

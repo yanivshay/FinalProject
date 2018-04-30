@@ -12,17 +12,19 @@ namespace FinalProject.WebApi.Controllers
     public class MeasurementController : ApiController
     {
         MeasurementActions bl = MeasurementActions.getInstance();
-
-        // GET values
-        public List<Measurement> Get()
-        {
-            return bl.GetMeasurements();
-        }
+        
 
         // GET values/5
-        public Measurement Get(int id)
+        public List<Measurement> Get(int userId)
         {
-            return bl.GetMeasurementById(id);
+            return bl.GetMeasurementsByUser(userId);
+        }
+
+        [System.Web.Http.ActionName("GetMeasurementsByUser")]
+        [System.Web.Http.HttpGet]
+        public List<Measurement> GetMeasurementsByUser(int id)
+        {
+            return bl.GetMeasurementsByUser(id);
         }
 
         // POST values

@@ -112,14 +112,14 @@ namespace FinalProject.DAL
             return result;
         }
 
-        public List<Food> GetSimilarFoods(int mealType)
+        public FoodByMealType GetSimilarFoods()
         {
-            List<Food> result = new List<Food>();
+            var result = new FoodByMealType();
 
             //Create the SQL Query for returning an article category based on its primary key
-            string sqlQuery = String.Format("select * " +
-                                            "from Foods " +
-                                            "where FoodID in (select FoodID from MealTypes where MealType = {0})", mealType);            
+            string sqlQuery = String.Format("select Foods.*, MealTypes.MealType " +
+                                            "from MealTypes " +
+                                            "INNER JOIN Foods ON MealTypes.FoodID = Foods.FoodID");            
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
@@ -145,8 +145,26 @@ namespace FinalProject.DAL
                     food.Fat = Convert.ToDouble(dataReader["Fat"]);
                     food.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
                     food.Calories = Convert.ToDouble(dataReader["Calories"]);
-
-                    result.Add(food);
+                    var mealType = Convert.ToDouble(dataReader["MealType"]);
+                    
+                    switch (mealType)
+                    {
+                        case (1):
+                            {
+                                result.Breakfast.Add(food);
+                                break;
+                            }
+                        case (2):
+                            {
+                                result.Lunch.Add(food);
+                                break;
+                            }
+                        case (3):
+                            {
+                                result.Dinner.Add(food);
+                                break;
+                            }
+                    }
                 }
             }
 

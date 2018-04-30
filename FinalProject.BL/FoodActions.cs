@@ -38,9 +38,9 @@ namespace FinalProject.BL
             return dal.GetFoodById(foodId);
         }
 
-        public List<Food> GetSimilarFood(int mealType)
+        public FoodByMealType GetSimilarFood()
         {
-            return dal.GetSimilarFoods(mealType);
+            return dal.GetSimilarFoods();
         }
 
         public List<Food> GetFoods()

@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Food.cs" />
+    <Compile Include="FoodByMealType.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="MealsInMenu.cs" />
     <Compile Include="MealType.cs" />

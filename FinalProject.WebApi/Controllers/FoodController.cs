@@ -13,15 +13,13 @@ namespace FinalProject.WebApi.Controllers
     {
         FoodActions bl = FoodActions.getInstance();
 
-        // GET values
+        [System.Web.Http.ActionName("GetAll")]
         [System.Web.Http.HttpGet]
         public List<Food> Get()
         {
             return bl.GetFoods();
         }
-
-        [System.Web.Http.ActionName("GetByID")]
-        [System.Web.Http.HttpGet]
+        
         // GET values/5
         public Food Get(int id)
         {
@@ -30,9 +28,9 @@ namespace FinalProject.WebApi.Controllers
 
         [System.Web.Http.ActionName("SimilarFood")]
         [System.Web.Http.HttpGet]
-        public List<Food> GetSimilarFood(int mealType)
+        public FoodByMealType GetSimilarFood()
         {
-            return bl.GetSimilarFood(mealType);
+            return bl.GetSimilarFood();
         }
 
         // POST values

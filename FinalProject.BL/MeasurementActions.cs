@@ -38,6 +38,11 @@ namespace FinalProject.BL
             return dal.GetMeasurementById(id);
         }
 
+        public List<Measurement> GetMeasurementsByUser(int userId)
+        {
+            return dal.GetMeasurementsByUser(userId);
+        }
+
         public List<Measurement> GetMeasurements()
         {
             return dal.GetMeasurements();

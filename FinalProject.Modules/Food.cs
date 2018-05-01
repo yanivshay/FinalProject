@@ -39,6 +39,7 @@ namespace FinalProject.Modules
 
         public Food(Food food)
         {
+            this.FoodID = food.FoodID;
             this.Name = food.Name;
             this.Protein = food.Protein;
             this.Fat = food.Fat;

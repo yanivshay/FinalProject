@@ -24,25 +24,25 @@ namespace FinalProject.WebApi.Controllers
         {
             return bl.GetMenuById(id);
         }
-
-        // POST values
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.ActionName("InsertNew")]
-        public Menu InsertNew([FromBody]InsertMenuHelpClass value)
-        {
-            Menu menu = bl.InsertMenu(value.Menu);
-            UserActions.getInstance().UpdateUsersMenu(value.UserId, value.Menu);
-
-            return menu;
-        }
-
+        
         // POST values
         [System.Web.Http.HttpPost]
         [System.Web.Http.ActionName("Insert")]
         public Menu Insert([FromBody]InsertMenuHelpClass value)
         {
-            Menu menu = bl.IncreasePickRate(value.Menu);
+            Menu menu = null;
+
+            if (value.Menu.MenuID != 0)
+            {
+                menu = bl.IncreasePickRate(value.Menu);
+            }
+            else
+            {
+                menu = bl.InsertMenu(value.Menu);
+            }
+
             UserActions.getInstance().UpdateUsersMenu(value.UserId, value.Menu);
+
 
             return menu;
         }

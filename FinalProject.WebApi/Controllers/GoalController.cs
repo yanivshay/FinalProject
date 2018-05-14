@@ -25,6 +25,13 @@ namespace FinalProject.WebApi.Controllers
             return bl.GetGoalById(id);
         }
 
+        [System.Web.Http.ActionName("GetGoalsByUserId")]
+        [System.Web.Http.HttpGet]
+        public List<Goal> GetGoalsByUserId(int id)
+        {
+            return bl.GetGoalsByUserId(id);
+        }
+
         // POST values
         public int Post([FromBody]Goal value)
         {

@@ -53,16 +53,16 @@ namespace FinalProject.BL
             List<Menu> res = new List<Menu>();
 
             Random random = new Random();
-            int randomMenues = random.Next(3, 8);
-            int randomItemsToSwap = random.Next(4,7);
+            int randomMenues = random.Next(2, 8);
+            int randomItemsToSwap = random.Next(3,7);
 
             for (int i = 0; i < randomMenues; i++)
             {
-                int randomMenu1 = random.Next(1, 5);
-                int randomMenu2 = random.Next(1, 5);
+                int randomMenu1 = random.Next(0, 5);
+                int randomMenu2 = random.Next(0, 5);
 
                 while (randomMenu2 == randomMenu1)
-                    randomMenu2 = random.Next(1, 5);
+                    randomMenu2 = random.Next(0, 5);
                 
                 Menu newMenu1 = new Menu(menuPopulation[randomMenu1]);
                 Menu newMenu2 = new Menu(menuPopulation[randomMenu2]);
@@ -70,7 +70,7 @@ namespace FinalProject.BL
                 for (int j = 0; j < randomItemsToSwap; j++)
                 {
                     // 1 - breakfast, 2 - Lunch, 3 - dinner
-                    int randomMeal = random.Next(1, 3);
+                    int randomMeal = random.Next(1, 4);
 
                     switch ((MealTypeENUM)randomMeal)
                     {
@@ -98,19 +98,19 @@ namespace FinalProject.BL
 
             menuPopulation = menuPopulation.Concat(res).ToList();
 
-            int randomMutation = random.Next(2, 4);
+            int randomMutation = random.Next(1, 5);
             Food tmpRM, tmpNew;
             for (int i = 0; i < randomMutation; i++)
             {
-                int randomMutationIndex = random.Next(0, menuPopulation.Count() - 1);
+                int randomMutationIndex = random.Next(0, menuPopulation.Count());
                 // 1 - breakfast, 2 - Lunch, 3 - dinner
-                int randomMeal = random.Next(1, 3);
+                int randomMeal = random.Next(1, 4);
 
                 switch ((MealTypeENUM)randomMeal)
                 {
                     case MealTypeENUM.Breakfast:
                         {
-                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Breakfast.Count - 1);
+                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Breakfast.Count);
                             tmpRM = menuPopulation[randomMutationIndex].Breakfast[randomFood1];
                             menuPopulation[randomMutationIndex].Breakfast.RemoveAt(randomFood1);
                             tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Breakfast);
@@ -121,7 +121,7 @@ namespace FinalProject.BL
                         }
                     case MealTypeENUM.Lunch:
                         {
-                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Lunch.Count - 1);
+                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Lunch.Count);
                             tmpRM = menuPopulation[randomMutationIndex].Lunch[randomFood1];
                             menuPopulation[randomMutationIndex].Lunch.RemoveAt(randomFood1);
                             tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Lunch);
@@ -132,7 +132,7 @@ namespace FinalProject.BL
                         }
                     case MealTypeENUM.Dinner:
                         {
-                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Dinner.Count - 1);
+                            int randomFood1 = random.Next(0, menuPopulation[randomMutationIndex].Dinner.Count);
                             tmpRM = menuPopulation[randomMutationIndex].Dinner[randomFood1];
                             menuPopulation[randomMutationIndex].Dinner.RemoveAt(randomFood1);
                             tmpNew = FoodDal.getInstance().GetRandFood(MealTypeENUM.Dinner);
@@ -150,12 +150,12 @@ namespace FinalProject.BL
         private void mergeMeals(List<Food> meal1, List<Food> meal2)
         {
             Random random = new Random();
-            int randomFood1 = random.Next(0, meal1.Count - 1);
-            int randomFood2 = random.Next(0, meal2.Count - 1);
+            int randomFood1 = random.Next(0, meal1.Count);
+            int randomFood2 = random.Next(0, meal2.Count);
 
             Food temp = meal1[randomFood1];
             Food temp2 = meal2[randomFood2];
-
+            
             meal1.RemoveAt(randomFood1);
             meal2.RemoveAt(randomFood2);
 

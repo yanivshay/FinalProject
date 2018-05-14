@@ -38,6 +38,11 @@ namespace FinalProject.BL
             return dal.GetGoalById(id);
         }
 
+        public List<Goal> GetGoalsByUserId(int userId)
+        {
+            return dal.GetGoalsByUserId(userId);
+        }
+
         public List<Goal> GetGoals()
         {
             return dal.GetGoals();

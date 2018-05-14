@@ -126,3 +126,123 @@ VALUES ('5', '15');
 
 INSERT INTO MealsInMenues(MenuID, MealTypeID) 
 VALUES ('5', '123');
+--------------------------------------------------------------------
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '94');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '94');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '28');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('6', '125');
+--------------------------------------------------------------------
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '94');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '94');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '28');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '122');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '122');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '123');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('7', '123');
+--------------------------------------------------------------------
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '94');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '94');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '28');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '122');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '122');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '76');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '123');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('8', '123');
+--------------------------------------------------------------------
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '30');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '8');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '124');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '9');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '125');
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ('9', '125');

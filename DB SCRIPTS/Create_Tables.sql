@@ -20,7 +20,8 @@ CREATE TABLE Foods (
     Protein float NOT NULL,
     Fat float NOT NULL,
     Calories float NOT NULL,
-    Carbohydrates float NOT NULL
+    Carbohydrates float NOT NULL,
+	Grams int NOT NULL
 );
 
 CREATE TABLE MealTypes (

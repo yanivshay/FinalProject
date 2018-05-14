@@ -250,7 +250,7 @@ namespace FinalProject.DAL
             //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = String.Format(
                 "select FI.FoodID as FoodID, FI.Name as Name, FI.Protein as Protein, FI.Fat as Fat, " +
-                "FI.Carbohydrates as Carbohydrates, FI.Calories as Calories, MT.MealType as Type" +
+                "FI.Carbohydrates as Carbohydrates, FI.Calories as Calories, FI.Grams as Grams, MT.MealType as Type" +
                 " from Menues M, MealsInMenues MIM, MealTypes MT, Foods FI where" + 
                 " M.MenuID = {0} AND M.MenuID = MIM.MenuID AND MIM.MealTypeID = MT.MealTypeID AND MT.FoodID = FI.FoodID", menuId);
 
@@ -277,6 +277,7 @@ namespace FinalProject.DAL
                     food.Fat = Convert.ToDouble(dataReader["Fat"]);
                     food.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
                     food.Calories = Convert.ToDouble(dataReader["Calories"]);
+                    food.Grams = Convert.ToInt32(dataReader["Grams"]);
 
                     switch (type)
 	                {
@@ -317,7 +318,7 @@ namespace FinalProject.DAL
             //Create the SQL Query for returning an article category based on its primary key
             string sqlQuery = String.Format(
                 "select M.MenuID as MenuID, FI.FoodID as FoodID, FI.Name as Name, FI.Protein as Protein, FI.Fat as Fat, " +
-                "FI.Carbohydrates as Carbohydrates, FI.Calories as Calories, MT.MealType as Type" +
+                "FI.Carbohydrates as Carbohydrates, FI.Calories as Calories, FI.Grams as Grams, MT.MealType as Type" +
                 " from Menues M, MealsInMenues MIM, MealTypes MT, Foods FI where" +
                 " M.MenuID = MIM.MenuID AND MIM.MealTypeID = MT.MealTypeID AND MT.FoodID = FI.FoodID");
 
@@ -357,6 +358,7 @@ namespace FinalProject.DAL
                     food.Fat = Convert.ToDouble(dataReader["Fat"]);
                     food.Carbohydrates = Convert.ToDouble(dataReader["Carbohydrates"]);
                     food.Calories = Convert.ToDouble(dataReader["Calories"]);
+                    food.Grams = Convert.ToInt32(dataReader["Grams"]);
 
                     switch (type)
                     {

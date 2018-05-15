@@ -31,7 +31,7 @@ namespace FinalProject.BL
 
             List<Menu> menuPopulation = MenuDal.getInstance().GetMenues();
             fitness(menuPopulation, user);
-            List<Menu> bestFivePopulation = menuPopulation.OrderBy(x => x.MenuFitness).Take(5).ToList();
+            List<Menu> bestFivePopulation = menuPopulation.OrderByDescending(x => x.MenuFitness).Take(5).ToList();
             List<Menu> bestFivePopulation1 = geneticAlgo(bestFivePopulation, user, 1);
 
             return bestFivePopulation1;
@@ -41,7 +41,7 @@ namespace FinalProject.BL
         {
             var Population = breed(menuPopulation);
             fitness(Population, user);
-            List<Menu> bestFivePopulation = Population.OrderBy(x => x.MenuFitness).Take(5).ToList();
+            List<Menu> bestFivePopulation = Population.OrderByDescending(x => x.MenuFitness).Take(5).ToList();
             if (generation == 5)
                 return bestFivePopulation;
             else
@@ -53,7 +53,7 @@ namespace FinalProject.BL
             List<Menu> res = new List<Menu>();
 
             Random random = new Random();
-            int randomMenues = random.Next(2, 8);
+            int randomMenues = random.Next(20, 30);
             int randomItemsToSwap = random.Next(3,7);
 
             for (int i = 0; i < randomMenues; i++)
@@ -173,13 +173,14 @@ namespace FinalProject.BL
 
         private void fitness(List<Menu> menuPopulation, User user)
         {
+            int onebil = 1000000000;
             foreach (var menuIndividual in menuPopulation)
             {
                 menuIndividual.MenuFitness = 0;
-                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededCalories(user), menuIndividual.TotalCalories);
-                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededCarbohydrates(user), menuIndividual.TotalCarbohydrates);
-                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededFat, menuIndividual.TotalFat);
-                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededProteins, menuIndividual.TotalProtien);
+                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededCalories(user) * onebil, menuIndividual.TotalCalories * onebil) * 2;
+                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededCarbohydrates(user) * onebil, menuIndividual.TotalCarbohydrates * onebil);
+                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededFat * onebil, menuIndividual.TotalFat * onebil);
+                menuIndividual.MenuFitness += calculateRate(user.Goal.NeededProteins * onebil, menuIndividual.TotalProtien * onebil);
                 menuIndividual.MenuFitness += menuIndividual.PickRate * 0.01;
             }
         }

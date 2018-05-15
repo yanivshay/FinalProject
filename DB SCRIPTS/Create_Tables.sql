@@ -1,6 +1,7 @@
-DROP TABLE IF EXISTS FinalProjSportsteam.dbo.Users
+
 DROP TABLE IF EXISTS FinalProjSportsteam.dbo.Measurements
 DROP TABLE IF EXISTS FinalProjSportsteam.dbo.Goals
+DROP TABLE IF EXISTS FinalProjSportsteam.dbo.Users
 DROP TABLE IF EXISTS FinalProjSportsteam.dbo.MealsInMenues
 DROP TABLE IF EXISTS FinalProjSportsteam.dbo.Menues
 DROP TABLE IF EXISTS FinalProjSportsteam.dbo.MealTypes
@@ -41,6 +42,17 @@ CREATE TABLE MealsInMenues (
     MealTypeID int FOREIGN KEY REFERENCES MealTypes(MealTypeID)
 );
 
+CREATE TABLE Users (
+    UserID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	FirstName varchar(255) NOT NULL,
+	LastName varchar(255) NOT NULL,
+	Birthday datetime NOT NULL,
+	Height float NOT NULL,
+	Gender int NOT NULL,
+	Email varchar(255) NOT NULL,
+	Password varchar(255) NOT NULL
+);
+
 CREATE TABLE Goals (
     GoalID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	GoalWeight float NOT NULL,
@@ -57,15 +69,4 @@ CREATE TABLE Measurements (
 	BodyFat float,
 	UserID int FOREIGN KEY REFERENCES Users(UserID),
 	CreationDate datetime NOT NULL 
-);
-
-CREATE TABLE Users (
-    UserID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	FirstName varchar(255) NOT NULL,
-	LastName varchar(255) NOT NULL,
-	Birthday datetime NOT NULL,
-	Height float NOT NULL,
-	Gender int NOT NULL,
-	Email varchar(255) NOT NULL,
-	Password varchar(255) NOT NULL
 );

@@ -241,14 +241,14 @@ VALUES ('36', '1');
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ('36', '3');
 
-INSERT INTO MealTypes (FoodID, MealType) 
-VALUES ('37', '1');
+--INSERT INTO MealTypes (FoodID, MealType) 
+--VALUES ('37', '1');
 
-INSERT INTO MealTypes (FoodID, MealType) 
-VALUES ('37', '2');
+--INSERT INTO MealTypes (FoodID, MealType) 
+--VALUES ('37', '2');
 
-INSERT INTO MealTypes (FoodID, MealType) 
-VALUES ('37', '3');
+--INSERT INTO MealTypes (FoodID, MealType) 
+--VALUES ('37', '3');
 
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ('38', '1');
@@ -478,11 +478,11 @@ VALUES ('66', '2');
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ('66', '3');
 
-INSERT INTO MealTypes (FoodID, MealType) 
-VALUES ('67', '2');
+--INSERT INTO MealTypes (FoodID, MealType) 
+--VALUES ('67', '2');
 
-INSERT INTO MealTypes (FoodID, MealType) 
-VALUES ('67', '3');
+--INSERT INTO MealTypes (FoodID, MealType) 
+--VALUES ('67', '3');
 
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ('68', '2');
@@ -1009,8 +1009,8 @@ VALUES ('133', '3');
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ('134', '2');
 
-INSERT INTO MealTypes (FoodID, MealType) 
-VALUES ('133', '3');
+--INSERT INTO MealTypes (FoodID, MealType) 
+--VALUES ('133', '3');
 
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ('135', '2');

@@ -1217,3 +1217,14 @@ VALUES ((select TOP (1) FoodID from Foods where name like 'Dried fruit granola')
 INSERT INTO MealTypes (FoodID, MealType) 
 VALUES ((select TOP (1) FoodID from Foods where name like 'Dried fruit granola'), '3');
 -----------------------------------------------------------------------
+
+INSERT INTO Foods (Name, Protein, Fat, Calories, Carbohydrates, Grams)
+VALUES ('Cucumber', '0.65', '0.11', '15', '3.63', '100');
+
+INSERT INTO MealTypes (FoodID, MealType) 
+VALUES ((select TOP (1) FoodID from Foods where name like 'Cucumber'), '1');
+INSERT INTO MealTypes (FoodID, MealType) 
+VALUES ((select TOP (1) FoodID from Foods where name like 'Cucumber'), '2');
+INSERT INTO MealTypes (FoodID, MealType) 
+VALUES ((select TOP (1) FoodID from Foods where name like 'Cucumber'), '3');
+-----------------------------------------------------------------------

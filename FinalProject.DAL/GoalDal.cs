@@ -258,9 +258,9 @@ namespace FinalProject.DAL
                     goal.BodyFat = Convert.ToDouble(dataReader["BodyFat"]);
                     goal.GoalWeight = Convert.ToDouble(dataReader["GoalWeight"]);
                     goal.StartingWeight = Convert.ToDouble(dataReader["StartingWeight"]);
-                    goal.MenuID = Convert.ToInt32(dataReader["MenuID"]);
+                    goal.MenuID = (dataReader["MenuID"] is System.DBNull)? null: (int?)Convert.ToInt32(dataReader["MenuID"]);
                     goal.UserID = Convert.ToInt32(dataReader["UserID"]);
-                    goal.CreationDate = Convert.ToDateTime(dataReader["CreationDate"]);
+                    goal.CreationDate = (dataReader["CreationDate"] is System.DBNull) ? null : (DateTime?)Convert.ToDateTime(dataReader["CreationDate"]);
 
                     result.Add(goal);
                 }

@@ -72,6 +72,6 @@ namespace FinalProject.Modules
         public double NeededCarbohydrates(User usr)
         {
             return (double)((this.NeededCalories(usr) - this.NeededProteins * 4 - this.NeededFat * 9) / 4);
-        }
+        }   
     }
 }

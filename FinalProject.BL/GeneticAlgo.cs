@@ -37,9 +37,82 @@ namespace FinalProject.BL
             return bestFivePopulation1;
         }
 
+        class FoodEqualityComparer : IEqualityComparer<Food>
+        {
+            public bool Equals(Food a, Food b)
+            {
+                if (a.Name == b.Name)
+                    return true;
+                else
+                    return false;
+            }
+
+            public int GetHashCode(Food bx)
+            {
+                return 0;
+            }
+        }
+
+        private bool areMenuesEqual(Menu a, Menu b)
+        {
+            bool result = true;
+
+            // get each food 1 time
+            List<Food> distinctFoods = a.Foods.Distinct(new FoodEqualityComparer()).ToList();
+
+            // run on each foood
+            for(int foodIndex = 0; result && (foodIndex < distinctFoods.Count); foodIndex++)
+            {
+                Food currentFoodBeingChecked = distinctFoods[foodIndex];
+
+                // check if each food is found in both menues the same number if times
+                // because we are using a '&&' operator if 1 food isnt found the same number of times in each menu we will get false
+                result = result && (a.Foods.Count(f => f.Name == currentFoodBeingChecked.Name) == b.Foods.Count(f => f.Name == currentFoodBeingChecked.Name));
+            }
+
+            return result;
+        }
+
+        private List<Menu> removeMatchingMenues(List<Menu> population)
+        {
+            bool matchFound = false;
+            List<Menu> result = new List<Menu>();
+
+            // run forward on the whole population
+            for(int menuIndex = 0; menuIndex < population.Count; menuIndex++)
+            {
+                Menu menu = population[menuIndex];
+
+                // run 1 index forward on the population
+                for(int comparedMenuIndex = menuIndex + 1; (!matchFound) && (comparedMenuIndex < population.Count); comparedMenuIndex++)
+                {
+                    Menu comparedMenu = population[comparedMenuIndex];
+
+                    // if we have matching food counts we supect something!
+                    if(menu.Foods.Count == comparedMenu.Foods.Count)
+                    {
+                        // if we have the same number of foods check if menues are equal
+                        matchFound = areMenuesEqual(menu, comparedMenu);
+                    }
+                }
+
+                // we compared menu in index  [menuIndex] to every menu from it forward, meaning if we found a match we can inore the current menu
+                // because we will later add it, since the latter menu wont find a match
+                if (!matchFound)
+                {
+                    result.Add(menu);
+                }
+
+                matchFound = false;
+            }
+
+            return result;
+        }
+
         private List<Menu> geneticAlgo(List<Menu> menuPopulation, User user, int generation)
         {
             var Population = breed(menuPopulation);
+            Population = removeMatchingMenues(Population);
             fitness(Population, user);
             List<Menu> bestFivePopulation = Population.OrderByDescending(x => x.MenuFitness).Take(5).ToList();
             if (generation == 5)

@@ -654,6 +654,14 @@ VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID
 INSERT INTO MealsInMenues(MenuID, MealTypeID) 
 VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
 										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cucumber')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Broccoli')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
 										   FoodID = (select TOP (1) FoodID from Foods where name like 'Chicken Breast')));
 INSERT INTO MealsInMenues(MenuID, MealTypeID) 
 VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
@@ -2608,5 +2616,477 @@ INSERT INTO MealsInMenues(MenuID, MealTypeID)
 VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
 										   from MealTypes where MealType = '3' and 
 										   FoodID = (select TOP (1) FoodID from Foods where name like 'Corn')));
+
+----------------------------------------------------END MENU-----------------------------------------------------------------------------
+----------------------------------------------------START MENU-----------------------------------------------------------------------------
+INSERT INTO Menues(PickRate) values(0);
+
+-- morning
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Light Bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Grain bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Omelet')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Tzfat cheese 5%')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cabbage')));
+--lunch
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Sardines')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Nuts')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Couscous')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Zucchini')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Zucchini')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Potato')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Carrot')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Quinoa')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Grapes')));
+--evening
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Buckwheat')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Artichoke')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Asparagus')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Anchovy')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Apple')));
+
+----------------------------------------------------END MENU-----------------------------------------------------------------------------
+----------------------------------------------------START MENU-----------------------------------------------------------------------------
+INSERT INTO Menues(PickRate) values(0);
+
+-- morning
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Yogourt 1.5% fat')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Yogourt 1.5% fat')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Strawberries')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Figs')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Nuts')));
+--lunch
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Hummus')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Light bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Corn')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Beans')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Beans')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cucumber')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Bass fish')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Bass fish')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Banana')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Avocado')));
+--evening
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Chicken Breast')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Chicken Breast')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Mushroom')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Orange')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Rye bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Whole rice')));
+
+----------------------------------------------------END MENU-----------------------------------------------------------------------------
+----------------------------------------------------START MENU-----------------------------------------------------------------------------
+INSERT INTO Menues(PickRate) values(0);
+
+-- morning
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Canned Tuna')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cheese 5%')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cheese 5%')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wheat bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Plum')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Pear')));
+--lunch
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Gainer')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Grapes')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Corn')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Oatmeal')));
+--evening
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Ricotta cheese')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Tuna')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Zucchini')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Watermelon')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Rye bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Whole rice')));
+
+----------------------------------------------------END MENU-----------------------------------------------------------------------------
+----------------------------------------------------START MENU-----------------------------------------------------------------------------
+INSERT INTO Menues(PickRate) values(0);
+
+-- morning
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Canned Tuna')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cheese 5%')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Cheese 5%')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wheat bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Plum')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Pear')));
+--lunch
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Gainer')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Grapes')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Corn')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Oatmeal')));
+--evening
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Ricotta cheese')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Tuna')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Zucchini')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Watermelon')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Rye bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Whole rice')));
+
+----------------------------------------------------END MENU-----------------------------------------------------------------------------
+----------------------------------------------------START MENU-----------------------------------------------------------------------------
+INSERT INTO Menues(PickRate) values(0);
+
+-- morning
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Mozzarella cheese')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Pastrami')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Peach')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wheat bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wheat bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Granola nuts')));
+--lunch
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Beef heart')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Beef brain')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Borgol')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Couscous')));
+--evening
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Yogourt 1.5% fat')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Banana')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Melon')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Fish eggs')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Halloumi cheese')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Whole bread')));
+
+----------------------------------------------------END MENU-----------------------------------------------------------------------------
+----------------------------------------------------START MENU-----------------------------------------------------------------------------
+INSERT INTO Menues(PickRate) values(0);
+
+-- morning
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Almond milk')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Almond milk')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Almonds')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Nuts')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '1' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Protein shake')));
+--lunch
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wheat bread')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wild rice')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Wild rice')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Tuna')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Spinach')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Broccoli')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Sinta')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '2' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Pear')));
+--evening
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Schnitzel fish')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Salmon')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Quinoa')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Rice')));
+INSERT INTO MealsInMenues(MenuID, MealTypeID) 
+VALUES ((select max(MenuID) from Menues), (select TOP (1) MealTypeID 
+										   from MealTypes where MealType = '3' and 
+										   FoodID = (select TOP (1) FoodID from Foods where name like 'Apple')));
 
 ----------------------------------------------------END MENU-----------------------------------------------------------------------------

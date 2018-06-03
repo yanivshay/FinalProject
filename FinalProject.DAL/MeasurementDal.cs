@@ -157,7 +157,7 @@ namespace FinalProject.DAL
 
             Goal currGoal = GoalDal.getInstance().GetGoalByUserId(userId);
             //Create the SQL Query for returning all the msrmnts
-            string sqlQuery = String.Format("select * from Measurements where UserID = {0} and CreationDate >= '{1}'", userId, currGoal.CreationDate);
+            string sqlQuery = String.Format("select * from Measurements where UserID = {0} and CreationDate >= '{1}'", userId, ((DateTime)currGoal.CreationDate).ToString("yyyy-MM-dd HH:mm:ss"));
 
             //Create and open a connection to SQL Server 
             SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["sports_db"].ConnectionString);
